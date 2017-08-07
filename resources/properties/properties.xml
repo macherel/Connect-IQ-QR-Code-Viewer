@@ -1,0 +1,26 @@
+<properties>
+	<property id="codeEnable1" type="boolean"></property>
+	<property id="codeLabel1" type="string"></property>
+	<property id="codeValue1" type="string"></property>
+	<property id="codeEnable2" type="boolean"></property>
+	<property id="codeLabel2" type="string"></property>
+	<property id="codeValue2" type="string"></property>
+	<property id="codeEnable3" type="boolean"></property>
+	<property id="codeLabel3" type="string"></property>
+	<property id="codeValue3" type="string"></property>
+	<property id="codeEnable4" type="boolean"></property>
+	<property id="codeLabel4" type="string"></property>
+	<property id="codeValue4" type="string"></property>
+	<property id="codeEnable5" type="boolean"></property>
+	<property id="codeLabel5" type="string"></property>
+	<property id="codeValue5" type="string"></property>
+	<property id="codeEnable6" type="boolean"></property>
+	<property id="codeLabel6" type="string"></property>
+	<property id="codeValue6" type="string"></property>
+	<property id="codeEnable7" type="boolean"></property>
+	<property id="codeLabel7" type="string"></property>
+	<property id="codeValue7" type="string"></property>
+	<property id="codeEnable8" type="boolean"></property>
+	<property id="codeLabel8" type="string"></property>
+	<property id="codeValue8" type="string"></property>
+</properties>
