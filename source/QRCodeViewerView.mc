@@ -31,6 +31,11 @@ class QRCodeViewerView extends Ui.View {
 	function onLayout(dc) {
 		maxWidth = dc.getWidth();
 		maxHeight= dc.getHeight();
+		if(maxWidth == maxHeight) {
+			// For round device... Otherwise image is hidden in corner
+			maxWidth = maxWidth * 0.8;
+			maxHeight = maxHeight * 0.8;
+		}
 	}
 
 	// Called when this View is brought to the foreground. Restore
@@ -43,10 +48,16 @@ class QRCodeViewerView extends Ui.View {
 		if(data != null) {
 			image = null;
 			data = Communications.encodeURL(data);
-			var strUrl = "https://chart.googleapis.com/chart?cht=qr&chl=" + data + "&chs=500x500&choe=UTF-8&chld=L|2";
+			var strUrl = "https://chart.googleapis.com/chart";
 			Comm.makeImageRequest(
 				strUrl,
-				{},
+				{
+					"cht" => "qr",
+					"chl" => data,
+					"chs" => "500x500",
+					"choe" => "UTF-8",
+					"chld" => "L|2"
+				},
 				{
 					:maxWidth => maxWidth,
 					:maxHeight=> maxHeight
@@ -74,6 +85,8 @@ class QRCodeViewerView extends Ui.View {
 			);
 		}
 		if(App.getApp().getProperty("data") != null && image != null) {
+			dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
+			dc.clear();
 			dc.drawBitmap(
 				(dc.getWidth() - image.getWidth() ) / 2,
 				(dc.getHeight() - image.getHeight()) / 2,
