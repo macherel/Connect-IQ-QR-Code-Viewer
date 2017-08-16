@@ -9,16 +9,17 @@ class QRCodeViewerView extends Ui.View {
 	var maxWidth;
 	var maxHeight;
 
-	var image;
+	var image = null;
 
 	 // Set up the responseCallback function to return an image or null
 	function onReceiveImage(responseCode, data) {
-	
+		var app = App.getApp();
+
 		if (responseCode == 200) {
 			image = data;
 		} else {
 			image = null;
-			App.getApp().setProperty("message", responseCode.format("%d"));
+			app.setProperty("message", responseCode.format("%d"));
 		}
 		Ui.requestUpdate();
 	}
@@ -33,8 +34,8 @@ class QRCodeViewerView extends Ui.View {
 		maxHeight= dc.getHeight();
 		if(maxWidth == maxHeight) {
 			// For round device... Otherwise image is hidden in corner
-			maxWidth = maxWidth * 0.8;
-			maxHeight = maxHeight * 0.8;
+			maxWidth = maxWidth * 0.9;
+			maxHeight = maxHeight * 0.9;
 		}
 	}
 
@@ -43,24 +44,26 @@ class QRCodeViewerView extends Ui.View {
 	// loading resources into memory.
 	function onShow() {
 		var app = App.getApp();
-		
-		var data = app.getProperty("data");
+		var data  = app.getProperty("data");
+
 		if(data != null) {
 			image = null;
 			data = Communications.encodeURL(data);
 			var strUrl = "https://chart.googleapis.com/chart";
+			var size = maxWidth<maxHeight?maxWidth:maxHeight;
+			var sizeStr = size.format("%d");
 			Comm.makeImageRequest(
 				strUrl,
 				{
 					"cht" => "qr",
 					"chl" => data,
-					"chs" => "500x500",
+					"chs" => sizeStr + "x" + sizeStr,
 					"choe" => "UTF-8",
 					"chld" => "L|2"
 				},
 				{
-					:maxWidth => maxWidth,
-					:maxHeight=> maxHeight
+					:maxWidth => size,
+					:maxHeight=> size
 				},
 				method(:onReceiveImage)
 			);
@@ -74,6 +77,8 @@ class QRCodeViewerView extends Ui.View {
 		
 		var app = App.getApp();
 		var message = app.getProperty("message");
+		var data    = app.getProperty("data");
+
 		if(message != null) {
 			dc.setColor (Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
 			dc.drawText(
@@ -84,7 +89,7 @@ class QRCodeViewerView extends Ui.View {
 				Gfx.TEXT_JUSTIFY_CENTER
 			);
 		}
-		if(App.getApp().getProperty("data") != null && image != null) {
+		if(data != null && image != null) {
 			dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
 			dc.clear();
 			dc.drawBitmap(

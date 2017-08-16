@@ -335,6 +335,18 @@ class DMenuDelegate extends Ui.BehaviorDelegate
 		return true;		
 	}
 	
+	function onKey(e) {
+		switch(e.getKey()) {
+			case KEY_ENTER:
+			case KEY_START:
+			case KEY_MENU:
+				return onNextPage();
+			case KEY_LAP:
+				return onPreviousPage();
+		}
+		return false;
+	}
+
 	function onSelect ()
 	{
 		userMenuDelegate.onMenuItem (menu.selectedItem ());

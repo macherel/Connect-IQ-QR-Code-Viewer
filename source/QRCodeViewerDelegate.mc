@@ -29,4 +29,5 @@ class QRCodeViewerDelegate extends Ui.BehaviorDelegate {
 
         return true;
     }
+    function onMenu() {	return onSelect(); }
 }
