@@ -180,8 +180,8 @@ class DMenu extends Ui.View
 		var width = dc.getWidth ();
 		var height = dc.getHeight ();
 		
-        dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
-        dc.fillRectangle(0, 0, width, height);
+		dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
+		dc.fillRectangle(0, 0, width, height);
 
 		// Draw the menu items.
 		drawMenu.index = index;
@@ -192,7 +192,7 @@ class DMenu extends Ui.View
 		
 		// Draw the decorations.
 		var h3 = height / 3;
-        dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
+		dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
 		dc.setPenWidth (2);
 		dc.drawLine (0, h3, width, h3);
 		dc.drawLine (0, h3 * 2, width, h3 * 2);
@@ -211,7 +211,7 @@ class DMenu extends Ui.View
 		var y;
 
 		dc.setPenWidth (1);
-        dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
+		dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
 		
 		if (nextIndex != 0)
 		{
@@ -283,8 +283,8 @@ class DrawMenu extends Ui.Drawable
 			return;
 		}
 
-        dc.setColor (Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
-        dc.fillRectangle (0, y, width, h3);
+		dc.setColor (Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
+		dc.fillRectangle (0, y, width, h3);
 
 		if (menu.title != null)
 		{
@@ -354,9 +354,9 @@ class DMenuDelegate extends Ui.BehaviorDelegate
 		return true;
 	}
 	
-    function onBack () 
+	function onBack () 
 	{
-        Ui.popView (Ui.SLIDE_RIGHT);
+		Ui.popView (Ui.SLIDE_RIGHT);
 		return true;
-    }
+	}
 }
