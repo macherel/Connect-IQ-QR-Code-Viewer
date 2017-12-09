@@ -1,3 +1,4 @@
+using Toybox.WatchUi as Ui;
 using Toybox.Application as App;
 
 class QRCodeViewerApp extends App.AppBase {
@@ -24,7 +25,7 @@ class QRCodeViewerApp extends App.AppBase {
 	    		app.getProperty("codeValue" + i)
 	    	);
     	}
-    	if(app.getProperty("QRCodeGeneratingURL") == null) {
+    	if(app.getProperty("QRCodeGeneratingURL") == null || app.getProperty("QRCodeGeneratingURL").length() == 0) {
     		app.setProperty("QRCodeGeneratingURL", Ui.loadResource(Rez.Strings.defaultQRCodeGeneratingURL));
     	}
 	}
