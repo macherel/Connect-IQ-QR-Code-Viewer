@@ -4,9 +4,9 @@ using Toybox.System as Sys;
 
 class QRCodeViewerDelegate extends Ui.BehaviorDelegate {
 
-    function initialize() {
-        BehaviorDelegate.initialize();
-    }
+	function initialize() {
+		BehaviorDelegate.initialize();
+	}
 
 	function onSelect() {
 		var app = App.getApp();
@@ -18,7 +18,7 @@ class QRCodeViewerDelegate extends Ui.BehaviorDelegate {
 				var code = codes[i];
 				qrCodesMenu.add(new DMenuItem(i, code["label"], code["data"], code));
 			}
-			var view = new DMenu(qrCodesMenu, "QR Codes");
+			var view = new DMenu(qrCodesMenu, Ui.loadResource(Rez.Strings.mainMenuTitle));
 	
 			Ui.pushView(view, new DMenuDelegate(view, new QrCodeViewerMenuDelegate()), Ui.SLIDE_IMMEDIATE);
 		} else {
@@ -27,7 +27,7 @@ class QRCodeViewerDelegate extends Ui.BehaviorDelegate {
 			Ui.requestUpdate();
 		}
 
-        return true;
-    }
-    function onMenu() {	return onSelect(); }
+		return true;
+	}
+	function onMenu() {	return onSelect(); }
 }
