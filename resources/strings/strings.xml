@@ -1,37 +1,37 @@
 <strings>
-    <string id="appName">QR Code Viewer</string>
-    
-    <string id="errorNoQRCode">No QR code</string>
-    
-    <string id="mainMenuTitle">Select QRCode</string>
-    <string id="objectPickerTitle">Select QRCode</string>
+	<string id="appName">QR Code Viewer</string>
+	
+	<string id="errorNoQRCode">No QR code</string>
+	
+	<string id="mainMenuTitle">Select QRCode</string>
+	<string id="objectPickerTitle">Select QRCode</string>
 
 	<string id="QRCodeGeneratingURLTitle">QR Code URL</string> 
 	<string id="defaultQRCodeGeneratingURL">https://api.qrserver.com/v1/create-qr-code/?size=${SIZE}x${SIZE}&amp;data=${DATA}&amp;margin=25</string> 
 
-    <string id="codeEnable1">Enable</string>
-    <string id="codeLabel1">Label 1</string>
-    <string id="codeValue1">Value 1</string>
-    <string id="codeEnable2">Enable</string>
-    <string id="codeLabel2">Label 2</string>
-    <string id="codeValue2">Value 2</string>
-    <string id="codeEnable3">Enable</string>
-    <string id="codeLabel3">Label 3</string>
-    <string id="codeValue3">Value 3</string>
-    <string id="codeEnable4">Enable</string>
-    <string id="codeLabel4">Label 4</string>
-    <string id="codeValue4">Value 4</string>
-    <string id="codeEnable5">Enable</string>
-    <string id="codeLabel5">Label 5</string>
-    <string id="codeValue5">Value 5</string>
-    <string id="codeEnable6">Enable</string>
-    <string id="codeLabel6">Label 6</string>
-    <string id="codeValue6">Value 6</string>
-    <string id="codeEnable7">Enable</string>
-    <string id="codeLabel7">Label 7</string>
-    <string id="codeValue7">Value 7</string>
-    <string id="codeEnable8">Enable</string>
-    <string id="codeLabel8">Label 8</string>
-    <string id="codeValue8">Value 8</string>
+	<string id="codeEnable1">Enable</string>
+	<string id="codeLabel1">Label 1</string>
+	<string id="codeValue1">Value 1</string>
+	<string id="codeEnable2">Enable</string>
+	<string id="codeLabel2">Label 2</string>
+	<string id="codeValue2">Value 2</string>
+	<string id="codeEnable3">Enable</string>
+	<string id="codeLabel3">Label 3</string>
+	<string id="codeValue3">Value 3</string>
+	<string id="codeEnable4">Enable</string>
+	<string id="codeLabel4">Label 4</string>
+	<string id="codeValue4">Value 4</string>
+	<string id="codeEnable5">Enable</string>
+	<string id="codeLabel5">Label 5</string>
+	<string id="codeValue5">Value 5</string>
+	<string id="codeEnable6">Enable</string>
+	<string id="codeLabel6">Label 6</string>
+	<string id="codeValue6">Value 6</string>
+	<string id="codeEnable7">Enable</string>
+	<string id="codeLabel7">Label 7</string>
+	<string id="codeValue7">Value 7</string>
+	<string id="codeEnable8">Enable</string>
+	<string id="codeLabel8">Label 8</string>
+	<string id="codeValue8">Value 8</string>
 
 </strings>

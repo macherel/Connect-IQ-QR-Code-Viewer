@@ -4,9 +4,9 @@ using Toybox.System as Sys;
 
 class QRCodeViewerDelegate extends Ui.BehaviorDelegate {
 
-    function initialize() {
-        BehaviorDelegate.initialize();
-    }
+	function initialize() {
+		BehaviorDelegate.initialize();
+	}
 
 	function onSelect() {
 		var app = App.getApp();
@@ -27,7 +27,7 @@ class QRCodeViewerDelegate extends Ui.BehaviorDelegate {
 			Ui.requestUpdate();
 		}
 
-        return true;
-    }
-    function onMenu() {	return onSelect(); }
+		return true;
+	}
+	function onMenu() {	return onSelect(); }
 }
