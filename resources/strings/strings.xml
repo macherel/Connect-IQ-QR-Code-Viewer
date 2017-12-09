@@ -6,7 +6,8 @@
     <string id="mainMenuTitle">Select QRCode</string>
     <string id="objectPickerTitle">Select QRCode</string>
 
-    <string id="configUrlTitle">QR Codes URL</string>
+	<string id="QRCodeGeneratingURLTitle">QR Code URL</string> 
+	<string id="defaultQRCodeGeneratingURL">https://api.qrserver.com/v1/create-qr-code/?size=${SIZE}x${SIZE}&amp;data=${DATA}&amp;margin=25</string> 
 
     <string id="codeEnable1">Enable</string>
     <string id="codeLabel1">Label 1</string>

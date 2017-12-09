@@ -78,5 +78,8 @@
     <setting propertyKey="@Properties.codeValue8" title="@Strings.codeValue8">
         <settingConfig type="alphaNumeric" />
     </setting>
+	<setting propertyKey="@Properties.QRCodeGeneratingURL" title="@Strings.QRCodeGeneratingURLTitle"> 
+		<settingConfig type="alphaNumeric" /> 
+	</setting> 
 
 </settings>

@@ -49,18 +49,14 @@ class QRCodeViewerView extends Ui.View {
 		if(data != null) {
 			image = null;
 			data = Communications.encodeURL(data);
-			var strUrl = "https://chart.googleapis.com/chart";
+			var strUrl = app.getProperty("QRCodeGeneratingURL");
 			var size = maxWidth<maxHeight?maxWidth:maxHeight;
 			var sizeStr = size.format("%d");
+			strUrl = stringReplace(strUrl, "${DATA}", data);
+			strUrl = stringReplace(strUrl, "${SIZE}", sizeStr);
 			Comm.makeImageRequest(
 				strUrl,
-				{
-					"cht" => "qr",
-					"chl" => data,
-					"chs" => sizeStr + "x" + sizeStr,
-					"choe" => "UTF-8",
-					"chld" => "L|2"
-				},
+				{},
 				{
 					:maxWidth => size,
 					:maxHeight=> size
