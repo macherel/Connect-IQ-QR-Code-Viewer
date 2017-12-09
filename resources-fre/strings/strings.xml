@@ -1,0 +1,33 @@
+<strings>
+	<string id="errorNoQRCode">Pas de QR code</string>
+	
+	<string id="mainMenuTitle">QR Code</string>
+
+	<string id="QRCodeGeneratingURLTitle">URL de génération du QR Code</string> 
+
+	<string id="codeEnable1">Actif</string>
+	<string id="codeLabel1">Libellé 1</string>
+	<string id="codeValue1">Valeur 1</string>
+	<string id="codeEnable2">Actif</string>
+	<string id="codeLabel2">Libellé 2</string>
+	<string id="codeValue2">Valeur 2</string>
+	<string id="codeEnable3">Actif</string>
+	<string id="codeLabel3">Libellé 3</string>
+	<string id="codeValue3">Valeur 3</string>
+	<string id="codeEnable4">Actif</string>
+	<string id="codeLabel4">Libellé 4</string>
+	<string id="codeValue4">Valeur 4</string>
+	<string id="codeEnable5">Actif</string>
+	<string id="codeLabel5">Libellé 5</string>
+	<string id="codeValue5">Valeur 5</string>
+	<string id="codeEnable6">Actif</string>
+	<string id="codeLabel6">Libellé 6</string>
+	<string id="codeValue6">Valeur 6</string>
+	<string id="codeEnable7">Actif</string>
+	<string id="codeLabel7">Libellé 7</string>
+	<string id="codeValue7">Valeur 7</string>
+	<string id="codeEnable8">Actif</string>
+	<string id="codeLabel8">Libellé 8</string>
+	<string id="codeValue8">Valeur 8</string>
+
+</strings>

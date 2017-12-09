@@ -23,4 +23,5 @@
 	<property id="codeEnable8" type="boolean"></property>
 	<property id="codeLabel8" type="string"></property>
 	<property id="codeValue8" type="string"></property>
+	<property id="QRCodeGeneratingURL" type="string"></property>
 </properties>

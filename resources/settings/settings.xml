@@ -1,82 +1,85 @@
 <settings>
-    <setting propertyKey="@Properties.codeEnable1" title="@Strings.codeEnable1">
-        <settingConfig type="boolean" />
-    </setting>
-    <setting propertyKey="@Properties.codeLabel1" title="@Strings.codeLabel1">
-        <settingConfig type="alphaNumeric" />
-    </setting>
-    <setting propertyKey="@Properties.codeValue1" title="@Strings.codeValue1">
-        <settingConfig type="alphaNumeric" />
-    </setting>
+	<setting propertyKey="@Properties.codeEnable1" title="@Strings.codeEnable1">
+		<settingConfig type="boolean" />
+	</setting>
+	<setting propertyKey="@Properties.codeLabel1" title="@Strings.codeLabel1">
+		<settingConfig type="alphaNumeric" />
+	</setting>
+	<setting propertyKey="@Properties.codeValue1" title="@Strings.codeValue1">
+		<settingConfig type="alphaNumeric" />
+	</setting>
 
-    <setting propertyKey="@Properties.codeEnable2" title="@Strings.codeEnable2">
-        <settingConfig type="boolean" />
-    </setting>
-    <setting propertyKey="@Properties.codeLabel2" title="@Strings.codeLabel2">
-        <settingConfig type="alphaNumeric" />
-    </setting>
-    <setting propertyKey="@Properties.codeValue2" title="@Strings.codeValue2">
-        <settingConfig type="alphaNumeric" />
-    </setting>
+	<setting propertyKey="@Properties.codeEnable2" title="@Strings.codeEnable2">
+		<settingConfig type="boolean" />
+	</setting>
+	<setting propertyKey="@Properties.codeLabel2" title="@Strings.codeLabel2">
+		<settingConfig type="alphaNumeric" />
+	</setting>
+	<setting propertyKey="@Properties.codeValue2" title="@Strings.codeValue2">
+		<settingConfig type="alphaNumeric" />
+	</setting>
 
-    <setting propertyKey="@Properties.codeEnable3" title="@Strings.codeEnable3">
-        <settingConfig type="boolean" />
-    </setting>
-    <setting propertyKey="@Properties.codeLabel3" title="@Strings.codeLabel3">
-        <settingConfig type="alphaNumeric" />
-    </setting>
-    <setting propertyKey="@Properties.codeValue3" title="@Strings.codeValue3">
-        <settingConfig type="alphaNumeric" />
-    </setting>
+	<setting propertyKey="@Properties.codeEnable3" title="@Strings.codeEnable3">
+		<settingConfig type="boolean" />
+	</setting>
+	<setting propertyKey="@Properties.codeLabel3" title="@Strings.codeLabel3">
+		<settingConfig type="alphaNumeric" />
+	</setting>
+	<setting propertyKey="@Properties.codeValue3" title="@Strings.codeValue3">
+		<settingConfig type="alphaNumeric" />
+	</setting>
 
-    <setting propertyKey="@Properties.codeEnable4" title="@Strings.codeEnable4">
-        <settingConfig type="boolean" />
-    </setting>
-    <setting propertyKey="@Properties.codeLabel4" title="@Strings.codeLabel4">
-        <settingConfig type="alphaNumeric" />
-    </setting>
-    <setting propertyKey="@Properties.codeValue4" title="@Strings.codeValue4">
-        <settingConfig type="alphaNumeric" />
-    </setting>
+	<setting propertyKey="@Properties.codeEnable4" title="@Strings.codeEnable4">
+		<settingConfig type="boolean" />
+	</setting>
+	<setting propertyKey="@Properties.codeLabel4" title="@Strings.codeLabel4">
+		<settingConfig type="alphaNumeric" />
+	</setting>
+	<setting propertyKey="@Properties.codeValue4" title="@Strings.codeValue4">
+		<settingConfig type="alphaNumeric" />
+	</setting>
 
-    <setting propertyKey="@Properties.codeEnable5" title="@Strings.codeEnable5">
-        <settingConfig type="boolean" />
-    </setting>
-    <setting propertyKey="@Properties.codeLabel5" title="@Strings.codeLabel5">
-        <settingConfig type="alphaNumeric" />
-    </setting>
-    <setting propertyKey="@Properties.codeValue5" title="@Strings.codeValue5">
-        <settingConfig type="alphaNumeric" />
-    </setting>
+	<setting propertyKey="@Properties.codeEnable5" title="@Strings.codeEnable5">
+		<settingConfig type="boolean" />
+	</setting>
+	<setting propertyKey="@Properties.codeLabel5" title="@Strings.codeLabel5">
+		<settingConfig type="alphaNumeric" />
+	</setting>
+	<setting propertyKey="@Properties.codeValue5" title="@Strings.codeValue5">
+		<settingConfig type="alphaNumeric" />
+	</setting>
 
-    <setting propertyKey="@Properties.codeEnable6" title="@Strings.codeEnable6">
-        <settingConfig type="boolean" />
-    </setting>
-    <setting propertyKey="@Properties.codeLabel6" title="@Strings.codeLabel6">
-        <settingConfig type="alphaNumeric" />
-    </setting>
-    <setting propertyKey="@Properties.codeValue6" title="@Strings.codeValue6">
-        <settingConfig type="alphaNumeric" />
-    </setting>
+	<setting propertyKey="@Properties.codeEnable6" title="@Strings.codeEnable6">
+		<settingConfig type="boolean" />
+	</setting>
+	<setting propertyKey="@Properties.codeLabel6" title="@Strings.codeLabel6">
+		<settingConfig type="alphaNumeric" />
+	</setting>
+	<setting propertyKey="@Properties.codeValue6" title="@Strings.codeValue6">
+		<settingConfig type="alphaNumeric" />
+	</setting>
 
-    <setting propertyKey="@Properties.codeEnable7" title="@Strings.codeEnable7">
-        <settingConfig type="boolean" />
-    </setting>
-    <setting propertyKey="@Properties.codeLabel7" title="@Strings.codeLabel7">
-        <settingConfig type="alphaNumeric" />
-    </setting>
-    <setting propertyKey="@Properties.codeValue7" title="@Strings.codeValue7">
-        <settingConfig type="alphaNumeric" />
-    </setting>
+	<setting propertyKey="@Properties.codeEnable7" title="@Strings.codeEnable7">
+		<settingConfig type="boolean" />
+	</setting>
+	<setting propertyKey="@Properties.codeLabel7" title="@Strings.codeLabel7">
+		<settingConfig type="alphaNumeric" />
+	</setting>
+	<setting propertyKey="@Properties.codeValue7" title="@Strings.codeValue7">
+		<settingConfig type="alphaNumeric" />
+	</setting>
 
-    <setting propertyKey="@Properties.codeEnable8" title="@Strings.codeEnable8">
-        <settingConfig type="boolean" />
-    </setting>
-    <setting propertyKey="@Properties.codeLabel8" title="@Strings.codeLabel8">
-        <settingConfig type="alphaNumeric" />
-    </setting>
-    <setting propertyKey="@Properties.codeValue8" title="@Strings.codeValue8">
-        <settingConfig type="alphaNumeric" />
-    </setting>
+	<setting propertyKey="@Properties.codeEnable8" title="@Strings.codeEnable8">
+		<settingConfig type="boolean" />
+	</setting>
+	<setting propertyKey="@Properties.codeLabel8" title="@Strings.codeLabel8">
+		<settingConfig type="alphaNumeric" />
+	</setting>
+	<setting propertyKey="@Properties.codeValue8" title="@Strings.codeValue8">
+		<settingConfig type="alphaNumeric" />
+	</setting>
+	<setting propertyKey="@Properties.QRCodeGeneratingURL" title="@Strings.QRCodeGeneratingURLTitle"> 
+		<settingConfig type="alphaNumeric" /> 
+	</setting> 
 
 </settings>

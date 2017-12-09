@@ -15,13 +15,17 @@ class QRCodeViewerApp extends App.AppBase {
 	}
 
 	function handleSettings() {
+		var app = Application.getApp();
         codes = [];
         for(var i=1; i<=8; i++) {
 	    	initQRCodeSettings(
-	    		Application.getApp().getProperty("codeEnable" + i),
-	    		Application.getApp().getProperty("codeLabel" + i),
-	    		Application.getApp().getProperty("codeValue" + i)
+	    		app.getProperty("codeEnable" + i),
+	    		app.getProperty("codeLabel" + i),
+	    		app.getProperty("codeValue" + i)
 	    	);
+    	}
+    	if(app.getProperty("QRCodeGeneratingURL") == null) {
+    		app.setProperty("QRCodeGeneratingURL", Ui.loadResource(Rez.Strings.defaultQRCodeGeneratingURL));
     	}
 	}
 	
