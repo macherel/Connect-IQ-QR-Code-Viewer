@@ -79,6 +79,10 @@ class DMenuItem
 		{
 			// Show label and value.
 			var val = value.toString ();
+			var index = val.find("\n");
+			if(index != null) {
+				val = val.substring(0, index);
+			}
 			var valDims = dc.getTextDimensions (val, VALUE_FONT);
 
 			h = labDims[1] + valDims[1] + PAD;
