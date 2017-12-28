@@ -8,20 +8,24 @@ class QRCodeViewerView extends Ui.View {
 
 	var maxWidth;
 	var maxHeight;
+	var requestCounter = 0;
 
 	var image = null;
 
 	 // Set up the responseCallback function to return an image or null
 	function onReceiveImage(responseCode, data) {
-		var app = App.getApp();
-
-		if (responseCode == 200) {
-			image = data;
-		} else {
-			image = null;
-			app.setProperty("message", responseCode.format("%d"));
+		requestCounter--;
+		if(requestCounter==0) { // handle only the last request
+			var app = App.getApp();
+	
+			if (responseCode == 200) {
+				image = data;
+			} else {
+				image = null;
+				app.setProperty("message", responseCode.format("%d"));
+			}
+			Ui.requestUpdate();
 		}
-		Ui.requestUpdate();
 	}
 
 	function initialize() {
@@ -54,6 +58,7 @@ class QRCodeViewerView extends Ui.View {
 			var sizeStr = size.format("%d");
 			strUrl = stringReplace(strUrl, "${DATA}", data);
 			strUrl = stringReplace(strUrl, "${SIZE}", sizeStr);
+			requestCounter++;
 			Comm.makeImageRequest(
 				strUrl,
 				{},
