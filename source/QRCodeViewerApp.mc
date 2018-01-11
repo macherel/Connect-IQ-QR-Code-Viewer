@@ -25,7 +25,7 @@ class QRCodeViewerApp extends App.AppBase {
 	    		app.getProperty("codeValue" + i)
 	    	);
     	}
-    	if(app.getProperty("QRCodeGeneratingURL") == null || app.getProperty("QRCodeGeneratingURL").length() == 0) {
+    	if(app.getProperty("CustomizeQRCodeGeneratingURL") == false || app.getProperty("QRCodeGeneratingURL") == null || app.getProperty("QRCodeGeneratingURL").length() == 0) {
     		app.setProperty("QRCodeGeneratingURL", Ui.loadResource(Rez.Strings.defaultQRCodeGeneratingURL));
     	}
 	}

@@ -3,6 +3,7 @@
 	
 	<string id="mainMenuTitle">QR Code</string>
 
+	<string id="CustomizeQRCodeGeneratingURL">Personnaliser l'URL de génération</string> 
 	<string id="QRCodeGeneratingURLTitle">URL de génération du QR Code</string> 
 
 	<string id="codeEnable1">Actif</string>

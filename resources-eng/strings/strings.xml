@@ -3,6 +3,7 @@
 	
 	<string id="mainMenuTitle">Select QR Code</string>
 
+	<string id="CustomizeQRCodeGeneratingURL">Customize QR Code URL</string> 
 	<string id="QRCodeGeneratingURLTitle">QR Code URL</string> 
 
 	<string id="codeEnable1">Enable</string>
