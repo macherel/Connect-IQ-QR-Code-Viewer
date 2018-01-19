@@ -2,26 +2,30 @@
     <iq:application entry="QRCodeViewerApp" id="0a952fa0dd7a4146b278ae7588730d2d" launcherIcon="@Drawables.LauncherIcon" minSdkVersion="1.3.0" name="@Strings.appName" type="widget">
         <iq:products>
             <iq:product id="vivoactive_hr"/>
-            <iq:product id="edge_1000"/>
-            <iq:product id="fenix3"/>
-            <iq:product id="fenix5"/>
-            <iq:product id="d2bravo"/>
             <iq:product id="fenix5s"/>
             <iq:product id="oregon7xx"/>
-            <iq:product id="fr735xt"/>
             <iq:product id="vivoactive"/>
             <iq:product id="rino7xx"/>
             <iq:product id="edge820"/>
             <iq:product id="fr230"/>
             <iq:product id="fr630"/>
-            <iq:product id="edge_520"/>
-            <iq:product id="fenix5x"/>
+            <iq:product id="edge1030"/>
             <iq:product id="d2bravo_titanium"/>
             <iq:product id="fenixchronos"/>
             <iq:product id="fr235"/>
             <iq:product id="fr920xt"/>
-            <iq:product id="fenix3_hr"/>
             <iq:product id="fr935"/>
+            <iq:product id="edge_1000"/>
+            <iq:product id="fenix3"/>
+            <iq:product id="descentmk1"/>
+            <iq:product id="fenix5"/>
+            <iq:product id="d2bravo"/>
+            <iq:product id="fr735xt"/>
+            <iq:product id="edge_520"/>
+            <iq:product id="fenix5x"/>
+            <iq:product id="vivoactive3"/>
+            <iq:product id="approachs60"/>
+            <iq:product id="fenix3_hr"/>
         </iq:products>
         <iq:permissions>
             <iq:uses-permission id="Communications"/>
