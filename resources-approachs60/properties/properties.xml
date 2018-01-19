@@ -1,0 +1,4 @@
+<properties>
+	<property id="maxWidth" type="number">180</property>
+	<property id="maxHeight" type="number">180</property>
+</properties>

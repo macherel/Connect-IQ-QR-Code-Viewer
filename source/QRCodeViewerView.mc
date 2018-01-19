@@ -34,6 +34,8 @@ class QRCodeViewerView extends Ui.View {
 
 	// Load your resources here
 	function onLayout(dc) {
+		var _maxWidth_  = Application.getApp().getProperty("maxWidth");
+		var _maxHeight_ = Application.getApp().getProperty("maxHeight");
 		maxWidth = dc.getWidth();
 		maxHeight= dc.getHeight();
 		if(maxWidth == maxHeight) {
@@ -41,6 +43,8 @@ class QRCodeViewerView extends Ui.View {
 			maxWidth = maxWidth * 0.9;
 			maxHeight = maxHeight * 0.9;
 		}
+		if(_maxWidth_  > 0 && maxWidth  > _maxWidth_ ) { maxWidth  = _maxWidth_;  }
+		if(_maxHeight_ > 0 && maxHeight > _maxHeight_) { maxHeight = _maxHeight_; }
 	}
 
 	// Called when this View is brought to the foreground. Restore
