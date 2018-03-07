@@ -1,6 +1,7 @@
 <properties>
 	<property id="maxWidth" type="number">0</property>
 	<property id="maxHeight" type="number">0</property>
+	<property id="margin" type="number">15</property>
 
 	<property id="codeEnable1" type="boolean"></property>
 	<property id="codeLabel1" type="string"></property>
