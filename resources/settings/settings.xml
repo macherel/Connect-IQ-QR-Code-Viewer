@@ -84,5 +84,8 @@
 	<setting propertyKey="@Properties.QRCodeGeneratingURL" title="@Strings.QRCodeGeneratingURLTitle"> 
 		<settingConfig type="alphaNumeric" /> 
 	</setting> 
+	<setting propertyKey="@Properties.size" title="@Strings.sizeTitle"> 
+		<settingConfig type="numeric" />
+	</setting> 
 
 </settings>

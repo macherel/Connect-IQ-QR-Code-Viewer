@@ -6,11 +6,10 @@ using Toybox.Graphics as Gfx;
 
 class QRCodeViewerView extends Ui.View {
 
-	var margin;
-	var maxWidth;
-	var maxHeight;
-	var requestCounter = 0;
+	var maxWidth  = 0;
+	var maxHeight = 0;
 
+	var requestCounter = 0;
 	var image = null;
 
 	 // Set up the responseCallback function to return an image or null
@@ -31,23 +30,18 @@ class QRCodeViewerView extends Ui.View {
 
 	function initialize() {
 		View.initialize();
-		margin = App.getApp().getProperty("margin");
 	}
 
 	// Load your resources here
 	function onLayout(dc) {
-		var app = App.getApp();
-		var _maxWidth_  = app.getProperty("maxWidth");
-		var _maxHeight_ = app.getProperty("maxHeight");
-		maxWidth = dc.getWidth();
-		maxHeight= dc.getHeight();
+		maxWidth = dc.getWidth()  * 0.8;
+		maxHeight= dc.getHeight() * 0.8;
 		if(maxWidth == maxHeight) {
 			// For round device... Otherwise image is hidden in corner
 			maxWidth = maxWidth * 0.8;
 			maxHeight = maxHeight * 0.8;
 		}
-		if(_maxWidth_  > 0 && maxWidth  > _maxWidth_ ) { maxWidth  = _maxWidth_;  }
-		if(_maxHeight_ > 0 && maxHeight > _maxHeight_) { maxHeight = _maxHeight_; }
+
 	}
 
 	// Called when this View is brought to the foreground. Restore
@@ -61,11 +55,15 @@ class QRCodeViewerView extends Ui.View {
 			image = null;
 			data = Communications.encodeURL(data);
 			var strUrl = app.getProperty("QRCodeGeneratingURL");
-			var size = maxWidth<maxHeight?maxWidth:maxHeight;
+			var size = app.getProperty("size");
+			if(size == 0) {
+				size = maxWidth<maxHeight?maxWidth:maxHeight;
+				app.setProperty("size", size);
+			}
 			var sizeStr = size.format("%d");
 			strUrl = stringReplace(strUrl, "${DATA}", data);
 			strUrl = stringReplace(strUrl, "${SIZE}", sizeStr);
-			strUrl = stringReplace(strUrl, "${MARGIN}", margin);
+			strUrl = stringReplace(strUrl, "${MARGIN}", 0);
 			requestCounter++;
 			Comm.makeImageRequest(
 				strUrl,

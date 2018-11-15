@@ -1,5 +1,0 @@
-<properties>
-	<property id="maxWidth" type="number">180</property>
-	<property id="maxHeight" type="number">180</property>
-	<property id="margin" type="number">10</property>	
-</properties>
