@@ -1,10 +1,14 @@
 <strings>
+	<string id="appName">QR Code Viewer</string>
+	
 	<string id="errorNoQRCode">Pas de QR code</string>
 	
 	<string id="mainMenuTitle">QR Code</string>
 
 	<string id="CustomizeQRCodeGeneratingURL">Personnaliser l'URL de génération</string> 
 	<string id="QRCodeGeneratingURLTitle">URL de génération du QR Code</string> 
+	<string id="defaultQRCodeGeneratingURL">https://api.qrserver.com/v1/create-qr-code/?size=${SIZE}x${SIZE}&amp;data=${DATA}&amp;margin=0</string> 
+	<string id="sizeTitle">Taille</string> 
 
 	<string id="codeEnable1">Actif</string>
 	<string id="codeLabel1">Libellé 1</string>
