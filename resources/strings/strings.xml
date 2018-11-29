@@ -8,8 +8,10 @@
 	<string id="CustomizeQRCodeGeneratingURL">Customize QR Code URL</string> 
 	<string id="QRCodeGeneratingURLTitle">QR Code URL</string> 
 	<string id="defaultQRCodeGeneratingURL">https://api.qrserver.com/v1/create-qr-code/?size=${SIZE}x${SIZE}&amp;data=${DATA}&amp;margin=0</string> 
-	<string id="sizeTitle">Size</string> 
+	<string id="sizeTitle">Size</string>
+	<string id="offsetY">Offset Y</string>
 
+	<string id="displayLabel">Display label</string> 
 	<string id="codeEnable1">Enable</string>
 	<string id="codeLabel1">Label 1</string>
 	<string id="codeValue1">Value 1</string>
