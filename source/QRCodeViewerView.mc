@@ -8,6 +8,8 @@ class QRCodeViewerView extends Ui.View {
 
 	var maxWidth  = 0;
 	var maxHeight = 0;
+	var offsetHeight = 0;
+	var size = 0;
 
 	var requestCounter = 0;
 	var image = null;
@@ -34,6 +36,8 @@ class QRCodeViewerView extends Ui.View {
 
 	// Load your resources here
 	function onLayout(dc) {
+		var app = App.getApp();
+		
 		maxWidth = dc.getWidth()  * 0.8;
 		maxHeight= dc.getHeight() * 0.8;
 		if(maxWidth == maxHeight) {
@@ -42,6 +46,18 @@ class QRCodeViewerView extends Ui.View {
 			maxHeight = maxHeight * 0.8;
 		}
 
+		if(app.getProperty("displayLabel")) {
+			var fontHeight = Gfx.getFontHeight(Gfx.FONT_MEDIUM);
+			var marginBottom = (dc.getHeight() - maxHeight) / 2;
+			if(marginBottom < fontHeight) {
+				offsetHeight = fontHeight - marginBottom;
+				maxHeight = maxHeight - offsetHeight;
+			}
+		}
+		size = app.getProperty("size");
+		if(size == 0) {
+			size = maxWidth<maxHeight?maxWidth:maxHeight;
+		}
 	}
 
 	// Called when this View is brought to the foreground. Restore
@@ -55,11 +71,6 @@ class QRCodeViewerView extends Ui.View {
 			image = null;
 			data = Communications.encodeURL(data);
 			var strUrl = app.getProperty("QRCodeGeneratingURL");
-			var size = app.getProperty("size");
-			if(size == 0) {
-				size = maxWidth<maxHeight?maxWidth:maxHeight;
-				app.setProperty("size", size);
-			}
 			var sizeStr = size.format("%d");
 			strUrl = stringReplace(strUrl, "${DATA}", data);
 			strUrl = stringReplace(strUrl, "${SIZE}", sizeStr);
@@ -99,9 +110,19 @@ class QRCodeViewerView extends Ui.View {
 		if(data != null && image != null) {
 			dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
 			dc.clear();
+			if(app.getProperty("displayLabel") && message != null) {
+				dc.setColor (Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
+				dc.drawText(
+					(dc.getWidth()) / 2,
+					(dc.getHeight() + image.getHeight()) / 2 - offsetHeight - app.getProperty("offsetY"),
+					Gfx.FONT_MEDIUM,
+					message,
+					Gfx.TEXT_JUSTIFY_CENTER
+				);
+			}
 			dc.drawBitmap(
 				(dc.getWidth() - image.getWidth() ) / 2,
-				(dc.getHeight() - image.getHeight()) / 2,
+				(dc.getHeight() - image.getHeight()) / 2 - offsetHeight - app.getProperty("offsetY"),
 				image
 			);
 		}

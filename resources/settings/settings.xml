@@ -1,4 +1,8 @@
 <settings>
+	<setting propertyKey="@Properties.displayLabel" title="@Strings.displayLabel">
+		<settingConfig type="boolean" />
+	</setting>
+
 	<setting propertyKey="@Properties.codeEnable1" title="@Strings.codeEnable1">
 		<settingConfig type="boolean" />
 	</setting>
@@ -85,6 +89,9 @@
 		<settingConfig type="alphaNumeric" /> 
 	</setting> 
 	<setting propertyKey="@Properties.size" title="@Strings.sizeTitle"> 
+		<settingConfig type="numeric" />
+	</setting> 
+	<setting propertyKey="@Properties.offsetY" title="@Strings.offsetY"> 
 		<settingConfig type="numeric" />
 	</setting> 
 
