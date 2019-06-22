@@ -16,7 +16,7 @@ class QRCodeViewerDelegate extends Ui.BehaviorDelegate {
 			var qrCodesMenu = [];
 			for(var i=0; i<codes.size(); i++) {
 				var code = codes[i];
-				qrCodesMenu.add(new DMenuItem(i, code["label"], code["data"], code));
+				qrCodesMenu.add(new DMenuItem(i, code["label"], code["value"], code));
 			}
 			var view = new DMenu(qrCodesMenu, Ui.loadResource(Rez.Strings.mainMenuTitle));
 	

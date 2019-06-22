@@ -11,7 +11,7 @@ class QrCodeViewerMenuDelegate extends Ui.MenuInputDelegate {
 
 	function onMenuItem (item) {
 		var app = App.getApp();
-		app.setProperty("data", item.value);
+		app.setProperty("value", item.value);
 		app.setProperty("message", item.label);
 		Ui.popView(Ui.SLIDE_IMMEDIATE);
 	}

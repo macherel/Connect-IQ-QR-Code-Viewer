@@ -6,6 +6,8 @@ using Toybox.Graphics as Gfx;
 
 class QRCodeViewerView extends Ui.View {
 
+	var app = App.getApp();
+	var qrCodeFont = Ui.loadResource(Rez.Fonts.qrcode);
 	var maxWidth  = 0;
 	var maxHeight = 0;
 	var offsetHeight = 0;
@@ -15,16 +17,14 @@ class QRCodeViewerView extends Ui.View {
 	var image = null;
 
 	 // Set up the responseCallback function to return an image or null
-	function onReceiveImage(responseCode, data) {
+	function onReceive(responseCode, data) {
 		requestCounter--;
-		if(requestCounter==0) { // handle only the last request
-			var app = App.getApp();
-	
+		if(requestCounter==0) { // handle only the last request	
 			if (responseCode == 200) {
-				image = data;
+			    app.setProperty("data", data);
 			} else {
-				image = null;
-				app.setProperty("message", responseCode.format("%d"));
+			    app.setProperty("data", null);
+				app.setProperty("message", "error: " + responseCode.format("%d"));
 			}
 			Ui.requestUpdate();
 		}
@@ -36,8 +36,6 @@ class QRCodeViewerView extends Ui.View {
 
 	// Load your resources here
 	function onLayout(dc) {
-		var app = App.getApp();
-		
 		maxWidth = dc.getWidth()  * 0.8;
 		maxHeight= dc.getHeight() * 0.8;
 		if(maxWidth == maxHeight) {
@@ -64,26 +62,21 @@ class QRCodeViewerView extends Ui.View {
 	// the state of this View and prepare it to be shown. This includes
 	// loading resources into memory.
 	function onShow() {
-		var app = App.getApp();
-		var data  = app.getProperty("data");
+		var value = app.getProperty("value");
 
-		if(data != null) {
-			image = null;
-			data = Communications.encodeURL(data);
-			var strUrl = app.getProperty("QRCodeGeneratingURL");
-			var sizeStr = size.format("%d");
-			strUrl = stringReplace(strUrl, "${DATA}", data);
-			strUrl = stringReplace(strUrl, "${SIZE}", sizeStr);
-			strUrl = stringReplace(strUrl, "${MARGIN}", 0);
-			requestCounter++;
-			Comm.makeImageRequest(
-				strUrl,
-				{},
+		if(value != null) {
+            app.setProperty("data", null);
+            requestCounter++;
+            Comm.makeWebRequest(
+                "https://qrcode.alwaysdata.net/phpqrcode/",
 				{
-					:maxWidth => size,
-					:maxHeight=> size
+				    "data" => value
 				},
-				method(:onReceiveImage)
+				{
+					:methods => Comm.HTTP_REQUEST_METHOD_GET,
+					:responseType => Comm.HTTP_RESPONSE_CONTENT_TYPE_JSON
+				},
+				method(:onReceive)
 			);
 		}
 	}
@@ -93,7 +86,6 @@ class QRCodeViewerView extends Ui.View {
 		// Call the parent onUpdate function to redraw the layout
 		View.onUpdate(dc);
 		
-		var app = App.getApp();
 		var message = app.getProperty("message");
 		var data    = app.getProperty("data");
 
@@ -107,10 +99,13 @@ class QRCodeViewerView extends Ui.View {
 				Gfx.TEXT_JUSTIFY_CENTER
 			);
 		}
-		if(data != null && image != null) {
-			dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
+		if(data != null) {
+			var error = null;
+			dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 			dc.clear();
-			if(app.getProperty("displayLabel") && message != null) {
+			dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+			drawQRCode(dc, data, 0, 0, 0);
+			if(app.getProperty("displayLabel") && message != null && false) { // FIXME: fix "false" condition
 				dc.setColor (Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
 				dc.drawText(
 					(dc.getWidth()) / 2,
@@ -120,11 +115,12 @@ class QRCodeViewerView extends Ui.View {
 					Gfx.TEXT_JUSTIFY_CENTER
 				);
 			}
-			dc.drawBitmap(
-				(dc.getWidth() - image.getWidth() ) / 2,
-				(dc.getHeight() - image.getHeight()) / 2 - offsetHeight - app.getProperty("offsetY"),
-				image
-			);
+//*/
+//			dc.drawBitmap(
+//				(dc.getWidth() - image.getWidth() ) / 2,
+//				(dc.getHeight() - image.getHeight()) / 2 - offsetHeight - app.getProperty("offsetY"),
+//				image
+//			);
 		}
 	}
 
@@ -134,4 +130,18 @@ class QRCodeViewerView extends Ui.View {
 	function onHide() {
 	}
 
+	function drawQRCode(dc, encodedLines, moduleSize, offsetX, offsetY) {
+		System.println(encodedLines);
+		var nbLines = encodedLines.size();
+		var offsetY = (dc.getHeight() - (nbLines-1) * 16) / 2;
+		for(var i=0; i<nbLines; i++) {
+			dc.drawText(
+					(dc.getWidth()) / 2,
+					offsetY + (i * 16),
+					qrCodeFont,
+					encodedLines[i],
+					Gfx.TEXT_JUSTIFY_CENTER
+			);
+		}
+	}
 }
