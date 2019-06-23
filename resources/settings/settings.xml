@@ -82,6 +82,9 @@
 	<setting propertyKey="@Properties.codeValue8" title="@Strings.codeValue8">
 		<settingConfig type="alphaNumeric" />
 	</setting>
+	<setting propertyKey="@Properties.retainMenuIndex" title="@Strings.retainMenuIndex">
+		<settingConfig type="boolean" />
+	</setting>
 	<setting propertyKey="@Properties.CustomizeQRCodeGeneratingURL" title="@Strings.CustomizeQRCodeGeneratingURL">
 		<settingConfig type="boolean" />
 	</setting>

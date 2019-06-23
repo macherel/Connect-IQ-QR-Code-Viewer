@@ -24,6 +24,7 @@
 	<property id="codeEnable8" type="boolean"></property>
 	<property id="codeLabel8" type="string"></property>
 	<property id="codeValue8" type="string"></property>
+	<property id="retainMenuIndex" type="boolean"></property>
 	<property id="CustomizeQRCodeGeneratingURL" type="boolean"></property>
 	<property id="QRCodeGeneratingURL" type="string"></property>
 	<property id="size" type="number">0</property>

@@ -5,6 +5,7 @@
 	
 	<string id="mainMenuTitle">Select QR Code</string>
 
+	<string id="retainMenuIndex">Retain menu index</string> 
 	<string id="CustomizeQRCodeGeneratingURL">Customize QR Code URL</string> 
 	<string id="QRCodeGeneratingURLTitle">QR Code URL</string> 
 	<string id="defaultQRCodeGeneratingURL">https://api.qrserver.com/v1/create-qr-code/?size=${SIZE}x${SIZE}&amp;data=${DATA}&amp;margin=0</string> 
