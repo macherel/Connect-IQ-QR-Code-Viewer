@@ -2,7 +2,8 @@
 	<string id="appName">QR Code Viewer</string>
 	
 	<string id="errorNoQRCode">No QR code</string>
-	
+	<string id="selectQRCode">Select QR code</string>
+
 	<string id="mainMenuTitle">Select QR Code</string>
 
 	<string id="retainMenuIndex">Retain menu index</string> 

@@ -180,6 +180,9 @@ class DMenu extends Ui.View
 	
 	function onUpdate (dc)
 	{
+		if(drawMenu == null) {
+			return;
+		}
 		var width = dc.getWidth ();
 		var height = dc.getHeight ();
 		

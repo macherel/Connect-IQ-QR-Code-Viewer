@@ -28,10 +28,8 @@ class QRCodeViewerDelegate extends Ui.BehaviorDelegate {
 
 			Ui.pushView(view, new DMenuDelegate(view, new QrCodeViewerMenuDelegate()), Ui.SLIDE_IMMEDIATE);
 		} else {
-			QRCodeViewerView.message = Ui.loadResource(Rez.Strings.errorNoQRCode);
 			Ui.requestUpdate();
 		}
-
 		return true;
 	}
 	function onMenu() {	return onSelect(); }

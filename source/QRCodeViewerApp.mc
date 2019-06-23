@@ -10,20 +10,23 @@ class QRCodeViewerApp extends App.AppBase {
 		var app = App.getApp();
 
 		if (responseCode == 200) {
-
 			var id = data["id"];
 			app.setProperty("cacheValue" + id, data["data"]);
 			app.setProperty("cacheData"  + id, data["response"]);
+			System.println("Cache data #" + id + " loaded");
 		} else {
+			System.println("Error while loading cache #" + id);
 		    // nothing to do, data will be store next time
 		}
 	}
 	
 	function loadQRCodeData(id) {
+		System.println("Initialize QR code #" + id);
 		var app = App.getApp();
 		app.setProperty("cacheValue" + id, null);
 		app.setProperty("cacheData"  + id, null);
-//		if(app.getProperty("cacheEnabled")) {
+		if(app.getProperty("cacheEnabled")) {
+			System.println("Loading cache data #" + id);
 			Comm.makeWebRequest(
 				"https://qrcode.alwaysdata.net/phpqrcode/",
 				{
@@ -40,7 +43,7 @@ class QRCodeViewerApp extends App.AppBase {
 				},
 				method(:onReceive)
 			);
-//		}
+		}
 	}
 	
 	function initQRCodeSettings(id) {
@@ -54,11 +57,15 @@ class QRCodeViewerApp extends App.AppBase {
 			if(value != null && !value.equals(cacheValue)) {
 				loadQRCodeData(id);
 			}
+			System.println("Add QR code #" + id);
 			enabledCodeIds.add(id);
+		} else if(app.getProperty("currentId") == id) {
+			app.setProperty("currentId", null);
 		}
 	}
 
 	function handleSettings() {
+		System.println("Handle settings...");
 		var app = App.getApp();
         enabledCodeIds = [];
         for(var i=1; i<=8; i++) {
@@ -70,8 +77,10 @@ class QRCodeViewerApp extends App.AppBase {
 	}
 	
     function initialize() {
+		System.println("App initialization...");
         AppBase.initialize();
         handleSettings();
+		System.println("App initialized.");
     }
 
 	function onSettingsChanged() {
