@@ -1,13 +1,18 @@
 using Toybox.WatchUi as Ui;
-using Toybox.Communications as Comm;
 using Toybox.Application as App;
-using Toybox.System as Sys;
+using Toybox.Communications as Comm;
 using Toybox.Graphics as Gfx;
 
 class QRCodeViewerView extends Ui.View {
 
-	var app = App.getApp();
-	var qrCodeFont = Ui.loadResource(Rez.Fonts.qrcode);
+	var qrCodeFont = [
+		Ui.loadResource(Rez.Fonts.qrcode1),
+		Ui.loadResource(Rez.Fonts.qrcode2),
+		Ui.loadResource(Rez.Fonts.qrcode3),
+		Ui.loadResource(Rez.Fonts.qrcode4),
+		Ui.loadResource(Rez.Fonts.qrcode5),
+		Ui.loadResource(Rez.Fonts.qrcode6)
+	];
 	var maxWidth  = 0;
 	var maxHeight = 0;
 	var offsetHeight = 0;
@@ -15,16 +20,19 @@ class QRCodeViewerView extends Ui.View {
 
 	var requestCounter = 0;
 	var image = null;
+	var message = null;
 
-	 // Set up the responseCallback function to return an image or null
-	function onReceive(responseCode, data) {
+	// Set up the responseCallback function to return an image or null
+	function onReceiveImage(responseCode, data) {
 		requestCounter--;
-		if(requestCounter==0) { // handle only the last request	
+		if(requestCounter==0) { // handle only the last request
+	
 			if (responseCode == 200) {
-			    app.setProperty("data", data);
+				image = data;
 			} else {
-			    app.setProperty("data", null);
-				app.setProperty("message", "error: " + responseCode.format("%d"));
+				image = null;
+				var app = App.getApp();
+				message = "Error: " + responseCode.format("%d");
 			}
 			Ui.requestUpdate();
 		}
@@ -36,6 +44,7 @@ class QRCodeViewerView extends Ui.View {
 
 	// Load your resources here
 	function onLayout(dc) {
+		var app = App.getApp();
 		maxWidth = dc.getWidth()  * 0.8;
 		maxHeight= dc.getHeight() * 0.8;
 		if(maxWidth == maxHeight) {
@@ -46,9 +55,9 @@ class QRCodeViewerView extends Ui.View {
 
 		if(app.getProperty("displayLabel")) {
 			var fontHeight = Gfx.getFontHeight(Gfx.FONT_MEDIUM);
-			var marginBottom = (dc.getHeight() - maxHeight) / 2;
-			if(marginBottom < fontHeight) {
-				offsetHeight = fontHeight - marginBottom;
+			var marginTop = (dc.getHeight() - maxHeight) / 2;
+			if(marginTop < fontHeight) {
+				offsetHeight = fontHeight - marginTop;
 				maxHeight = maxHeight - offsetHeight;
 			}
 		}
@@ -62,21 +71,29 @@ class QRCodeViewerView extends Ui.View {
 	// the state of this View and prepare it to be shown. This includes
 	// loading resources into memory.
 	function onShow() {
-		var value = app.getProperty("value");
+		var app = App.getApp();
+		var id = app.getProperty("currentId");
 
-		if(value != null) {
-            app.setProperty("data", null);
-            requestCounter++;
-            Comm.makeWebRequest(
-                "https://qrcode.alwaysdata.net/phpqrcode/",
+		var data = getCachedData(id);
+		if(data == null) {
+			image = null;
+			message = app.getProperty("codeLabel" + id);
+			data = app.getProperty("codeValue" + id);
+			data = Communications.encodeURL(data);
+			var strUrl = app.getProperty("QRCodeGeneratingURL");
+			var sizeStr = size.format("%d");
+			strUrl = stringReplace(strUrl, "${DATA}", data);
+			strUrl = stringReplace(strUrl, "${SIZE}", sizeStr);
+			strUrl = stringReplace(strUrl, "${MARGIN}", 0);
+			requestCounter++;
+			Comm.makeImageRequest(
+				strUrl,
+				{},
 				{
-				    "data" => value
+					:maxWidth => size,
+					:maxHeight=> size
 				},
-				{
-					:methods => Comm.HTTP_REQUEST_METHOD_GET,
-					:responseType => Comm.HTTP_RESPONSE_CONTENT_TYPE_JSON
-				},
-				method(:onReceive)
+				method(:onReceiveImage)
 			);
 		}
 	}
@@ -86,9 +103,9 @@ class QRCodeViewerView extends Ui.View {
 		// Call the parent onUpdate function to redraw the layout
 		View.onUpdate(dc);
 		
-		var message = app.getProperty("message");
-		var data    = app.getProperty("data");
-
+		var app = App.getApp();
+		var id      = app.getProperty("currentId");
+		var data    = getCachedData(id);
 		if(message != null) {
 			dc.setColor (Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
 			dc.drawText(
@@ -99,28 +116,43 @@ class QRCodeViewerView extends Ui.View {
 				Gfx.TEXT_JUSTIFY_CENTER
 			);
 		}
-		if(data != null) {
+		if(data != null || image != null) {
 			var error = null;
+			var imageHeight;
+			var imageFontSize = 1;
+			if(data != null) {
+				for(imageFontSize = 1;
+				    imageFontSize < qrCodeFont.size() &&
+				    (imageFontSize+1) * data.size() * 4 < maxHeight+0.001;
+				    imageFontSize++
+				) {
+				}
+				imageHeight = imageFontSize * data.size() * 4;
+			} else {
+				imageHeight = image.getHeight();
+			}
 			dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 			dc.clear();
-			dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
-			drawQRCode(dc, data, 0, 0, 0);
-			if(app.getProperty("displayLabel") && message != null && false) { // FIXME: fix "false" condition
+			if(data != null) {
+				dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+				drawQRCode(dc, data, imageFontSize);
+			} else {
+				dc.drawBitmap(
+					(dc.getWidth() - image.getWidth() ) / 2,
+					(dc.getHeight() - image.getHeight()) / 2 + offsetHeight + app.getProperty("offsetY"),
+					image
+				);
+			}
+			if(app.getProperty("displayLabel")) {
 				dc.setColor (Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
 				dc.drawText(
 					(dc.getWidth()) / 2,
-					(dc.getHeight() + image.getHeight()) / 2 - offsetHeight - app.getProperty("offsetY"),
+					0,
 					Gfx.FONT_MEDIUM,
-					message,
+					app.getProperty("codeLabel" + id),
 					Gfx.TEXT_JUSTIFY_CENTER
 				);
 			}
-//*/
-//			dc.drawBitmap(
-//				(dc.getWidth() - image.getWidth() ) / 2,
-//				(dc.getHeight() - image.getHeight()) / 2 - offsetHeight - app.getProperty("offsetY"),
-//				image
-//			);
 		}
 	}
 
@@ -130,18 +162,29 @@ class QRCodeViewerView extends Ui.View {
 	function onHide() {
 	}
 
-	function drawQRCode(dc, encodedLines, moduleSize, offsetX, offsetY) {
-		System.println(encodedLines);
-		var nbLines = encodedLines.size();
-		var offsetY = (dc.getHeight() - (nbLines-1) * 16) / 2;
+	function drawQRCode(dc, datas, moduleSize) {
+		if(!(datas instanceof Toybox.Lang.Array)) {
+			return;
+		}
+		var nbLines = datas.size();
+		var offsetY = (dc.getHeight() - (nbLines-1) * 4 * moduleSize) / 2;
 		for(var i=0; i<nbLines; i++) {
 			dc.drawText(
 					(dc.getWidth()) / 2,
-					offsetY + (i * 16),
-					qrCodeFont,
-					encodedLines[i],
+					offsetY + (i * 4 * moduleSize),
+					qrCodeFont[moduleSize-1],
+					datas[i],
 					Gfx.TEXT_JUSTIFY_CENTER
 			);
 		}
 	}
+	
+	function getCachedData(id) {
+		var app = App.getApp();
+		if(app.getProperty("cacheEnabled")) {
+			return app.getProperty("cacheData" + id);
+		}
+		return null;
+	}
+	
 }

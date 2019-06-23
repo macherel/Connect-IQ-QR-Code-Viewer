@@ -1,67 +1,68 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Application as App;
+using Toybox.Communications as Comm;
 
 class QRCodeViewerApp extends App.AppBase {
 
-	
-	var codes = [];
+	var enabledCodeIds = [];
 
 	function onReceive(responseCode, data) {
 		var app = App.getApp();
 
 		if (responseCode == 200) {
-			app.setProperty("data", data);
+
+			var id = data["id"];
+			app.setProperty("cacheValue" + id, data["data"]);
+			app.setProperty("cacheData"  + id, data["response"]);
 		} else {
-			app.setProperty("data", null);
-			app.setProperty("message", "error: " + responseCode.format("%d"));
+		    // nothing to do, data will be store next time
 		}
-		Ui.requestUpdate();
 	}
 	
-	function loadQRCodeData(code) {
-		Comm.makeWebRequest(
-			"https://qrcode.alwaysdata.net/phpqrcode/",
-			{
-				"size" => 6,
-				"data" => code["value"]
-			},
-			{
-				:methods => Comm.HTTP_REQUEST_METHOD_GET,
-				:headers => {
-					"Content-Type" => Comm.REQUEST_CONTENT_TYPE_JSON
+	function loadQRCodeData(id) {
+		var app = App.getApp();
+		app.setProperty("cacheValue" + id, null);
+		app.setProperty("cacheData"  + id, null);
+//		if(app.getProperty("cacheEnabled")) {
+			Comm.makeWebRequest(
+				"https://qrcode.alwaysdata.net/phpqrcode/",
+				{
+					"id"    => id,
+					"data" => app.getProperty("codeValue" + id),
+					"token" => app.getProperty("token")
 				},
-				:responseType => Comm.HTTP_RESPONSE_CONTENT_TYPE_JSON
-			},
-			method(:onReceive)
-		);
+				{
+					:methods => Comm.HTTP_REQUEST_METHOD_GET,
+					:headers => {
+						"Content-Type" => Comm.REQUEST_CONTENT_TYPE_JSON
+					},
+					:responseType => Comm.HTTP_RESPONSE_CONTENT_TYPE_JSON
+				},
+				method(:onReceive)
+			);
+//		}
 	}
 	
-	function initQRCodeSettings(enable, label, value, cachedValue, cachedData) {
+	function initQRCodeSettings(id) {
+		var app = App.getApp();
+		var enable = app.getProperty("codeEnable"  + id);
+		var label  = app.getProperty("codeLabel"   + id);
+		var value  = app.getProperty("codeValue"   + id);
+
 		if(enable && label != null && label.length() > 0 && value != null && value.length() > 0) {
-			var code = {
-				"label" => label,
-				"value" => value,
-				"cachedValue" => cachedValue,
-				"cachedData"  => cachedData
-			};
-			if(value != cachedValue) {
-				//loadQRCodeData(code);
+			var cacheValue = app.getProperty("cacheValue" + id);
+			if(value != null && !value.equals(cacheValue)) {
+				loadQRCodeData(id);
 			}
-			codes.add(code);
+			enabledCodeIds.add(id);
 		}
 	}
 
 	function handleSettings() {
-        var app = App.getApp();
-        codes = [];
+		var app = App.getApp();
+        enabledCodeIds = [];
         for(var i=1; i<=8; i++) {
-	    	initQRCodeSettings(
-	    		app.getProperty("codeEnable"  + i),
-	    		app.getProperty("codeLabel"   + i),
-	    		app.getProperty("codeValue"   + i),
-	    		app.getProperty("cachedValue" + i),
-	    		app.getProperty("cachedData"  + i)
-	    	);
+	    	initQRCodeSettings(i);
     	}
     	if(app.getProperty("CustomizeQRCodeGeneratingURL") == false || app.getProperty("QRCodeGeneratingURL") == null || app.getProperty("QRCodeGeneratingURL").length() == 0) {
     		app.setProperty("QRCodeGeneratingURL", Ui.loadResource(Rez.Strings.defaultQRCodeGeneratingURL));
@@ -70,7 +71,6 @@ class QRCodeViewerApp extends App.AppBase {
 	
     function initialize() {
         AppBase.initialize();
-App.getApp().setProperty("data", "foooo");
         handleSettings();
     }
 

@@ -87,12 +87,18 @@
 	</setting>
 	<setting propertyKey="@Properties.QRCodeGeneratingURL" title="@Strings.QRCodeGeneratingURLTitle"> 
 		<settingConfig type="alphaNumeric" /> 
-	</setting> 
+	</setting>
 	<setting propertyKey="@Properties.size" title="@Strings.sizeTitle"> 
 		<settingConfig type="numeric" />
-	</setting> 
+	</setting>
 	<setting propertyKey="@Properties.offsetY" title="@Strings.offsetY"> 
 		<settingConfig type="numeric" />
-	</setting> 
+	</setting>
+	<setting propertyKey="@Properties.cacheEnabled" title="@Strings.offlineTitle"> 
+		<settingConfig type="boolean" />
+	</setting>
+	<setting propertyKey="@Properties.token" title="@Strings.token"> 
+		<settingConfig type="alphaNumeric" />
+	</setting>
 
 </settings>
