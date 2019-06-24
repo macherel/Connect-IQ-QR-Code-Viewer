@@ -1,6 +1,4 @@
 using Toybox.WatchUi as Ui;
-using Toybox.System as Sys;
-using Toybox.Math as Math;
 using Toybox.Application as App;
 
 class QrCodeViewerMenuDelegate extends Ui.MenuInputDelegate {
@@ -11,8 +9,8 @@ class QrCodeViewerMenuDelegate extends Ui.MenuInputDelegate {
 
 	function onMenuItem (item) {
 		var app = App.getApp();
-		app.setProperty("data", item.value);
-		app.setProperty("message", item.label);
+		var id = item.userData;
+		app.setProperty("currentId", id);
 		Ui.popView(Ui.SLIDE_IMMEDIATE);
 	}
 }

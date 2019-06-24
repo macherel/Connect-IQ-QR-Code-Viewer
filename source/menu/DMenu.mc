@@ -1,5 +1,4 @@
 using Toybox.WatchUi as Ui;
-using Toybox.System as Sys;
 using Toybox.Graphics as Gfx;
 
 var SCALE = 100;
@@ -181,6 +180,9 @@ class DMenu extends Ui.View
 	
 	function onUpdate (dc)
 	{
+		if(drawMenu == null) {
+			return;
+		}
 		var width = dc.getWidth ();
 		var height = dc.getHeight ();
 		

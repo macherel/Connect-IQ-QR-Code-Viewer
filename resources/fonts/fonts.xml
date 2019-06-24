@@ -1,0 +1,9 @@
+<fonts>
+	<font id="qrcode1" filename="qrcode.fnt"   filter="0123456789abcdef"/>
+	<font id="qrcode2" filename="qrcode-2.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode3" filename="qrcode-3.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode4" filename="qrcode-4.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode5" filename="qrcode-5.fnt" filter="0123456789abcdef"/>
+	<font id="qrcode6" filename="qrcode-6.fnt" filter="0123456789abcdef"/>
+</fonts>
+

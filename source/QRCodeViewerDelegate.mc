@@ -1,6 +1,5 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Application as App;
-using Toybox.System as Sys;
 
 class QRCodeViewerDelegate extends Ui.BehaviorDelegate {
 
@@ -10,23 +9,27 @@ class QRCodeViewerDelegate extends Ui.BehaviorDelegate {
 
 	function onSelect() {
 		var app = App.getApp();
-		var codes = app.codes;
 		
-		if(codes.size() > 0) {
+		if(app.enabledCodeIds.size() > 0) {
 			var qrCodesMenu = [];
-			for(var i=0; i<codes.size(); i++) {
-				var code = codes[i];
-				qrCodesMenu.add(new DMenuItem(i, code["label"], code["data"], code));
+			var currentId = app.getProperty("currentId");
+			var menuIndex = 0;
+			for(var i=0; i<app.enabledCodeIds.size(); i++) {
+				var id = app.enabledCodeIds[i];
+				if(id == currentId) {
+					menuIndex = i;
+				}
+				qrCodesMenu.add(new DMenuItem(i, app.getProperty("codeLabel" + id), app.getProperty("codeValue" + id), id));
 			}
 			var view = new DMenu(qrCodesMenu, Ui.loadResource(Rez.Strings.mainMenuTitle));
-	
+			if(app.getProperty("retainMenuIndex")) {
+				view.updateIndex(menuIndex);
+			}
+
 			Ui.pushView(view, new DMenuDelegate(view, new QrCodeViewerMenuDelegate()), Ui.SLIDE_IMMEDIATE);
 		} else {
-			app.setProperty("data", null);
-			app.setProperty("message", Ui.loadResource(Rez.Strings.errorNoQRCode));
 			Ui.requestUpdate();
 		}
-
 		return true;
 	}
 	function onMenu() {	return onSelect(); }
