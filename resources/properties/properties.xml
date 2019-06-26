@@ -29,6 +29,6 @@
 	<property id="QRCodeGeneratingURL" type="string"></property>
 	<property id="size" type="number">0</property>
 	<property id="offsetY" type="number">0</property>
-	<property id="cacheEnabled" type="boolean"></property>
+	<property id="cacheEnabled" type="boolean">true</property>
 	<property id="token" type="string"></property>
 </properties>
