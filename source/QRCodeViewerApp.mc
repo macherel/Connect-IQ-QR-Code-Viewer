@@ -79,6 +79,12 @@ class QRCodeViewerApp extends App.AppBase {
     function initialize() {
 		System.println("App initialization...");
         AppBase.initialize();
+        // Force default value for old version
+		var app = App.getApp();
+        if(app.getProperty("liVersion")==null) {
+			app.setProperty("liVersion", 0);
+        	app.setProperty("cacheEnabled", true);
+        }
         handleSettings();
 		System.println("App initialized.");
     }
