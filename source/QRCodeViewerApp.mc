@@ -8,6 +8,7 @@ class QRCodeViewerApp extends App.AppBase {
 	var loadingCache = 0;
 
 	function onReceive(responseCode, data) {
+		System.println("Receiving data (" + responseCode + "): " + data);
 		var app = App.getApp();
 		loadingCache--;
 		if (responseCode == 200) {
@@ -16,7 +17,7 @@ class QRCodeViewerApp extends App.AppBase {
 			app.setProperty("cacheData"  + id, data["response"]);
 			System.println("Cache data #" + id + " loaded");
 		} else {
-			System.println("Error while loading cache #" + id);
+			System.println("Error while loading data");
 			// nothing to do, data will be store next time
 		}
 		if(loadingCache==0) {
