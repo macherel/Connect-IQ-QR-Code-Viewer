@@ -24,11 +24,12 @@
 	<property id="codeEnable8" type="boolean"></property>
 	<property id="codeLabel8" type="string"></property>
 	<property id="codeValue8" type="string"></property>
-	<property id="retainMenuIndex" type="boolean"></property>
-	<property id="CustomizeQRCodeGeneratingURL" type="boolean"></property>
+	<property id="retainMenuIndex" type="boolean">false</property>
+	<property id="CustomizeQRCodeGeneratingURL" type="boolean">false</property>
 	<property id="QRCodeGeneratingURL" type="string"></property>
 	<property id="size" type="number">0</property>
 	<property id="offsetY" type="number">0</property>
 	<property id="cacheEnabled" type="boolean">true</property>
 	<property id="token" type="string"></property>
+	<property id="externalDatasEnabled" type="boolean">false</property>
 </properties>

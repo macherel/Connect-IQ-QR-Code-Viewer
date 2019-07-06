@@ -103,5 +103,8 @@
 	<setting propertyKey="@Properties.token" title="@Strings.token"> 
 		<settingConfig type="alphaNumeric" />
 	</setting>
+	<setting propertyKey="@Properties.externalDatasEnabled" title="@Strings.externalDatasEnabled"> 
+		<settingConfig type="boolean" />
+	</setting>
 
 </settings>
