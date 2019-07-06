@@ -14,6 +14,7 @@
 	<string id="offsetY">Offset Y</string>
 	<string id="offlineTitle">Mode déconnecté</string>
 	<string id="token">Token</string>
+	<string id="externalDatasEnabled">Activer les données externes</string>
 
 	<string id="displayLabel">Affiche les libellés</string>
 	<string id="codeEnable1">Actif</string>
