@@ -214,10 +214,13 @@ class QRCodeViewerView extends Ui.View {
 	}
 	
 	function getCachedData(id) {
+		System.println("Loading cached data for QR code #" + id);
 		var app = App.getApp();
 		if(app.getProperty("cacheEnabled")) {
+			System.println("Returing cached data");
 			return app.getProperty("cacheData" + id);
 		}
+		System.println("Cache is disabled.");
 		return null;
 	}
 	
