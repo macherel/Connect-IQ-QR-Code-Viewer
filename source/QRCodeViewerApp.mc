@@ -33,13 +33,13 @@ class QRCodeViewerApp extends App.AppBase {
 		if(app.getProperty("cacheEnabled") && (app.getProperty("token") != null || id==1)) {
 			System.println("Loading cache data #" + id);
 			loadingCache++;
+			var strUrl = "https://qrcode.macherel.fr/phpqrcode/";
+			strUrl += "?id=" + Communications.encodeURL(id.format("%d"));
+			strUrl += "&data=" + Communications.encodeURL(app.getProperty("codeValue" + id));
+			strUrl += "&token=" + Communications.encodeURL(app.getProperty("token"));
 			Comm.makeWebRequest(
-				"https://qrcode.macherel.fr/phpqrcode/",
-				{
-					"id"	=> id,
-					"data" => app.getProperty("codeValue" + id),
-					"token" => app.getProperty("token")
-				},
+				strUrl,
+				{},
 				{
 					:methods => Comm.HTTP_REQUEST_METHOD_GET,
 					:headers => {
