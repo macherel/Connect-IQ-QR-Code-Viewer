@@ -7,6 +7,10 @@ class QRCodeViewerApp extends App.AppBase {
 	var enabledCodeIds = [];
 	var loadingCache = 0;
 
+	function isNullOrEmpty(str) {
+		return str == null || str.length() == 0;
+	}
+
 	function onReceive(responseCode, data) {
 		System.println("Receiving data (" + responseCode + "): " + data);
 		var app = App.getApp();
@@ -30,13 +34,14 @@ class QRCodeViewerApp extends App.AppBase {
 		var app = App.getApp();
 		app.setProperty("cacheValue" + id, null);
 		app.setProperty("cacheData"  + id, null);
-		if(app.getProperty("cacheEnabled") && (app.getProperty("token") != null || id==1)) {
-			System.println("Loading cache data #" + id);
+		var token = app.getProperty("token");
+		if(app.getProperty("cacheEnabled") && (!isNullOrEmpty(token) || id==1)) {
+			System.println("Loading cached data #" + id);
 			loadingCache++;
 			var strUrl = "https://qrcode.macherel.fr/phpqrcode/";
 			strUrl += "?id=" + Communications.encodeURL(id.format("%d"));
 			strUrl += "&data=" + Communications.encodeURL(app.getProperty("codeValue" + id));
-			strUrl += "&token=" + Communications.encodeURL(app.getProperty("token"));
+			strUrl += "&token=" + Communications.encodeURL(token);
 			Comm.makeWebRequest(
 				strUrl,
 				{},
@@ -59,10 +64,12 @@ class QRCodeViewerApp extends App.AppBase {
 		var value  = app.getProperty("codeValue"   + id);
 		var cacheValue = app.getProperty("cacheValue" + id);
 		if(value == null || !value.equals(cacheValue)) {
+			// Reset cached value
 			cacheValue = null;
 			app.setProperty("cacheData" + id, null);
 		}
-		if(enable && label != null && label.length() > 0 && value != null && value.length() > 0) {
+		if(enable && !isNullOrEmpty(label) && !isNullOrEmpty(value)) {
+			// The QR Code exist, we have to handle with it
 			if(value != null && !value.equals(cacheValue)) {
 				loadQRCodeData(id);
 			}
