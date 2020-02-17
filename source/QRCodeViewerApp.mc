@@ -97,9 +97,11 @@ class QRCodeViewerApp extends App.AppBase {
 			var qrCodes = data["qrcodes"];
 			for(var i=0; i<8 && i<qrCodes.size(); i++) {
 				var id = i+1;
-				app.setProperty("codeEnable"  + id, true);
-				app.setProperty("codeLabel"   + id, qrCodes[i]["name"]);
-				app.setProperty("codeValue"   + id, qrCodes[i]["value"]);
+				app.setProperty("codeEnable" + id, true);
+				app.setProperty("codeLabel"  + id, qrCodes[i]["name"]);
+				app.setProperty("codeValue"  + id, qrCodes[i]["value"]);
+				app.setProperty("cacheValue" + id, qrCodes[i]["value"]);
+				app.setProperty("cacheData"  + id, qrCodes[i]["encodedValue"]);
 				System.println("QR code #" + id + " received.");
 			}
 			initQRCodes();
