@@ -32,4 +32,5 @@
 	<property id="cacheEnabled" type="boolean">true</property>
 	<property id="token" type="string"></property>
 	<property id="externalDatasEnabled" type="boolean">false</property>
+	<property id="usePosition" type="boolean">false</property>
 </properties>
