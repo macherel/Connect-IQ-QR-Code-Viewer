@@ -2,6 +2,7 @@
     <iq:application entry="QRCodeViewerApp" id="0a952fa0dd7a4146b278ae7588730d2d" launcherIcon="@Drawables.LauncherIcon" minSdkVersion="1.3.0" name="@Strings.appName" type="widget">
         <iq:products>
             <iq:product id="approachs60"/>
+            <iq:product id="approachs62"/>
             <iq:product id="d2bravo"/>
             <iq:product id="d2bravo_titanium"/>
             <iq:product id="d2charlie"/>
@@ -47,9 +48,13 @@
             <iq:product id="gpsmap86"/>
             <iq:product id="legacyherocaptainmarvel"/>
             <iq:product id="legacyherofirstavenger"/>
+            <iq:product id="legacysagadarthvader"/>
+            <iq:product id="legacysagarey"/>
+            <iq:product id="marqadventurer"/>
             <iq:product id="marqathlete"/>
             <iq:product id="marqaviator"/>
             <iq:product id="marqcaptain"/>
+            <iq:product id="marqcommander"/>
             <iq:product id="marqdriver"/>
             <iq:product id="marqexpedition"/>
             <iq:product id="oregon7xx"/>
