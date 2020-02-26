@@ -6,6 +6,33 @@ class QRCodeViewerApp extends App.AppBase {
 
 	var enabledCodeIds = [];
 	var loadingCache = 0;
+	var latlng = null;
+
+	function isNullOrEmpty(str) {
+		return str == null || str.length() == 0;
+	}
+
+	function canUseExternalData() {
+		var app = App.getApp();
+		return app.getProperty("externalDatasEnabled")
+			&& app.getProperty("token") != null
+			&& !app.getProperty("token").equals("");
+	}
+	function canUseExternalDataWithPosition() {
+		var app = App.getApp();
+		return app.getProperty("usePosition")
+			&& canUseExternalData();
+	}
+
+	function onPosition(info) {
+		System.println("Position received : " + info);
+		var myLocation = info.position.toDegrees();
+		latlng = {
+			:lat => myLocation[0],
+			:lng => myLocation[1]
+		};
+		loadQRCodes();
+	}
 
 	function onReceive(responseCode, data) {
 		System.println("Receiving data (" + responseCode + "): " + data);
@@ -30,13 +57,14 @@ class QRCodeViewerApp extends App.AppBase {
 		var app = App.getApp();
 		app.setProperty("cacheValue" + id, null);
 		app.setProperty("cacheData"  + id, null);
-		if(app.getProperty("cacheEnabled") && (app.getProperty("token") != null || id==1)) {
-			System.println("Loading cache data #" + id);
+		var token = app.getProperty("token");
+		if(app.getProperty("cacheEnabled") && (!isNullOrEmpty(token) || id==1)) {
+			System.println("Loading cached data #" + id);
 			loadingCache++;
 			var strUrl = "https://qrcode.macherel.fr/phpqrcode/";
 			strUrl += "?id=" + Communications.encodeURL(id.format("%d"));
 			strUrl += "&data=" + Communications.encodeURL(app.getProperty("codeValue" + id));
-			strUrl += "&token=" + Communications.encodeURL(app.getProperty("token"));
+			strUrl += "&token=" + Communications.encodeURL(token);
 			Comm.makeWebRequest(
 				strUrl,
 				{},
@@ -59,10 +87,12 @@ class QRCodeViewerApp extends App.AppBase {
 		var value  = app.getProperty("codeValue"   + id);
 		var cacheValue = app.getProperty("cacheValue" + id);
 		if(value == null || !value.equals(cacheValue)) {
+			// Reset cached value
 			cacheValue = null;
 			app.setProperty("cacheData" + id, null);
 		}
-		if(enable && label != null && label.length() > 0 && value != null && value.length() > 0) {
+		if(enable && !isNullOrEmpty(label) && !isNullOrEmpty(value)) {
+			// The QR Code exist, we have to handle with it
 			if(value != null && !value.equals(cacheValue)) {
 				loadQRCodeData(id);
 			}
@@ -90,10 +120,12 @@ class QRCodeViewerApp extends App.AppBase {
 			var qrCodes = data["qrcodes"];
 			for(var i=0; i<8 && i<qrCodes.size(); i++) {
 				var id = i+1;
-				app.setProperty("codeEnable"  + id, true);
-				app.setProperty("codeLabel"   + id, qrCodes[i]["name"]);
-				app.setProperty("codeValue"   + id, qrCodes[i]["value"]);
-				System.println("QR code #" + id + " received.");
+				app.setProperty("codeEnable" + id, true);
+				app.setProperty("codeLabel"  + id, qrCodes[i]["name"]);
+				app.setProperty("codeValue"  + id, qrCodes[i]["value"]);
+				app.setProperty("cacheValue" + id, qrCodes[i]["value"]);
+				app.setProperty("cacheData"  + id, qrCodes[i]["encodedData"]);
+				System.println("QR code #" + id + " \"" + qrCodes[i]["name"] + "\" received.");
 			}
 			initQRCodes();
 		} else {
@@ -106,10 +138,20 @@ class QRCodeViewerApp extends App.AppBase {
 	 * Load QR codes from webservice
 	 */
 	function loadQRCodes() {
+		if(!canUseExternalData()) {
+			return;
+		}
+
 		System.println("Loading QR codes...");
 		var app = App.getApp();
+		var strUrl = "https://data-manager-api.qrcode.macherel.fr/users/" + app.getProperty("token");
+		if(latlng != null && canUseExternalDataWithPosition()) {
+			strUrl += "?lat=" + latlng[:lat];
+			strUrl += "&lng=" + latlng[:lng];
+		}
+		System.println("Loading QR codes from " + strUrl);
 		Comm.makeWebRequest(
-			"https://data-manager-api.qrcode.macherel.fr/users/" + app.getProperty("token"),
+			strUrl,
 			null,
 			{
 				:methods => Comm.HTTP_REQUEST_METHOD_GET,
@@ -127,7 +169,10 @@ class QRCodeViewerApp extends App.AppBase {
 		System.println("Handle settings...");
 		var app = App.getApp();
 		initQRCodes();
-		if(app.getProperty("externalDatasEnabled") && app.getProperty("token") != null && !app.getProperty("token").equals("")) {
+		if(canUseExternalDataWithPosition()) {
+			System.println("Requesting position...");
+			Position.enableLocationEvents(Position.LOCATION_ONE_SHOT, method(:onPosition));
+		} else if(canUseExternalData()) {
 			loadQRCodes();
 		}
 		if(app.getProperty("CustomizeQRCodeGeneratingURL") == false || app.getProperty("QRCodeGeneratingURL") == null || app.getProperty("QRCodeGeneratingURL").length() == 0) {

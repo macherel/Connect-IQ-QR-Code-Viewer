@@ -106,5 +106,8 @@
 	<setting propertyKey="@Properties.externalDatasEnabled" title="@Strings.externalDatasEnabled"> 
 		<settingConfig type="boolean" />
 	</setting>
+	<setting propertyKey="@Properties.usePosition" title="@Strings.usePosition"> 
+		<settingConfig type="boolean" />
+	</setting>
 
 </settings>
