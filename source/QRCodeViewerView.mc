@@ -147,18 +147,16 @@ class QRCodeViewerView extends Ui.View {
 		if(id != null && (data != null || image != null)) {
 			System.println("Display QR code");
 			var error = null;
-			var imageHeight;
 			var imageFontSize = 1;
+			// On round watch barcode can be bigger
+			var factor = (maxHeight==maxWidth && data.size()==1) ? 0.7 : 1;			
 			if(data != null) {
 				for(imageFontSize = 1;
 				    imageFontSize < qrCodeFont.size() &&
-				    (imageFontSize+1) * data.size() * 4 < maxHeight+0.001;
+				    (imageFontSize+1) * data[0].length() < maxWidth/factor+0.001;
 				    imageFontSize++
 				) {
 				}
-				imageHeight = imageFontSize * data.size() * 4;
-			} else {
-				imageHeight = image.getHeight();
 			}
 			dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 			dc.clear();
@@ -201,13 +199,26 @@ class QRCodeViewerView extends Ui.View {
 		}
 		var app = App.getApp();
 		var nbLines = datas.size();
+		if(nbLines == 1) {
+			nbLines = 18 / moduleSize;
+		}
 		var offsetY = (dc.getHeight() - (nbLines-1) * 4 * moduleSize) / 2 + offsetHeight + app.getProperty("offsetY");
 		for(var i=0; i<nbLines; i++) {
 			dc.drawText(
 					(dc.getWidth()) / 2,
 					offsetY + (i * 4 * moduleSize),
 					qrCodeFont[moduleSize-1],
-					datas[i],
+					datas.size() == 1 ? datas[0] : datas[i], // For barcode, repeat the first raw
+					Gfx.TEXT_JUSTIFY_CENTER
+			);
+		}
+		if(datas.size() == 1) { // display value for barcode
+			dc.setColor (Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
+			dc.drawText(
+					(dc.getWidth()) / 2,
+					offsetY + (nbLines * 4 * moduleSize),
+					Gfx.FONT_XTINY,
+					app.getProperty("codeValue" + app.getProperty("currentId")),
 					Gfx.TEXT_JUSTIFY_CENTER
 			);
 		}
