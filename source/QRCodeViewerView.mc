@@ -148,9 +148,9 @@ class QRCodeViewerView extends Ui.View {
 			System.println("Display QR code");
 			var error = null;
 			var imageFontSize = 1;
-			// On round watch barcode can be bigger
-			var factor = (maxHeight==maxWidth && data.size()==1) ? 0.7 : 1;			
 			if(data != null) {
+				// On round watch barcode can be bigger
+				var factor = (maxHeight==maxWidth && data.size()==1) ? 0.7 : 1;			
 				for(imageFontSize = 1;
 				    imageFontSize < qrCodeFont.size() &&
 				    (imageFontSize+1) * data[0].length() < maxWidth/factor+0.001;
