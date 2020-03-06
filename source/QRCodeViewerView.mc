@@ -52,7 +52,17 @@ class QRCodeViewerView extends Ui.View {
 			Ui.loadResource(Rez.Fonts.qrcode3),
 			Ui.loadResource(Rez.Fonts.qrcode4),
 			Ui.loadResource(Rez.Fonts.qrcode5),
-			Ui.loadResource(Rez.Fonts.qrcode6)
+			Ui.loadResource(Rez.Fonts.qrcode6),
+			Ui.loadResource(Rez.Fonts.qrcode7),
+			Ui.loadResource(Rez.Fonts.qrcode8),
+			Ui.loadResource(Rez.Fonts.qrcode9),
+			Ui.loadResource(Rez.Fonts.qrcode10),
+			Ui.loadResource(Rez.Fonts.qrcode11),
+			Ui.loadResource(Rez.Fonts.qrcode12),
+			Ui.loadResource(Rez.Fonts.qrcode13),
+			Ui.loadResource(Rez.Fonts.qrcode14),
+			Ui.loadResource(Rez.Fonts.qrcode15),
+			Ui.loadResource(Rez.Fonts.qrcode16)
 		];
 		System.println("resources loaded.");	
 	}
@@ -150,10 +160,10 @@ class QRCodeViewerView extends Ui.View {
 			var imageFontSize = 1;
 			if(data != null) {
 				// On round watch barcode can be bigger
-				var factor = (maxHeight==maxWidth && data.size()==1) ? 0.7 : 1;			
+				var factor = (maxHeight==maxWidth && data.size()==1) ? 0.8 : 1;			
 				for(imageFontSize = 1;
 				    imageFontSize < qrCodeFont.size() &&
-				    (imageFontSize+1) * data[0].length() < maxWidth/factor+0.001;
+				    (imageFontSize+1) * data[0].length() <= size/factor+0.001;
 				    imageFontSize++
 				) {
 				}
