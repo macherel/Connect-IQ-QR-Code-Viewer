@@ -12,11 +12,14 @@ class QRCodeViewerApp extends App.AppBase {
 		return str == null || str.length() == 0;
 	}
 
+	function hasToken() {
+		var app = App.getApp();
+			return !isNullOrEmpty(app.getProperty("token"));
+	}
+
 	function canUseExternalData() {
 		var app = App.getApp();
-		return app.getProperty("externalDatasEnabled")
-			&& app.getProperty("token") != null
-			&& !app.getProperty("token").equals("");
+		return app.getProperty("externalDatasEnabled") && hasToken();
 	}
 	function canUseExternalDataWithPosition() {
 		var app = App.getApp();
@@ -43,6 +46,11 @@ class QRCodeViewerApp extends App.AppBase {
 			app.setProperty("cacheValue" + id, data["data"]);
 			app.setProperty("cacheData"  + id, data["response"]);
 			System.println("Cache data #" + id + " loaded");
+		} else if (responseCode == 401 && !isNullOrEmpty(data["id"])) {
+			var id = data["id"];
+			app.setProperty("cacheValue" + id, null);
+			app.setProperty("cacheData"  + id, null);
+			System.println("Invalid token while loading data #" + id);
 		} else {
 			System.println("Error while loading data");
 			// nothing to do, data will be store next time
@@ -59,12 +67,13 @@ class QRCodeViewerApp extends App.AppBase {
 		app.setProperty("cacheData"  + id, null);
 		var token = app.getProperty("token");
 		if(app.getProperty("cacheEnabled") && (!isNullOrEmpty(token) || id==1)) {
-			System.println("Loading cached data #" + id);
 			loadingCache++;
-			var strUrl = "https://qrcode.macherel.fr/phpqrcode/";
+			var strUrl = "https://data-manager-api.qrcode.macherel.fr/codes/";
 			strUrl += "?id=" + Communications.encodeURL(id.format("%d"));
-			strUrl += "&data=" + Communications.encodeURL(app.getProperty("codeValue" + id));
+			strUrl += "&text=" + Communications.encodeURL(app.getProperty("codeValue" + id));
+			strUrl += "&bcid=" + Communications.encodeURL(app.getProperty("codeType" + id));
 			strUrl += "&token=" + Communications.encodeURL(token);
+			System.println("Loading cached data #" + id + " from " + strUrl);
 			Comm.makeWebRequest(
 				strUrl,
 				{},
@@ -175,7 +184,7 @@ class QRCodeViewerApp extends App.AppBase {
 		} else if(canUseExternalData()) {
 			loadQRCodes();
 		}
-		if(app.getProperty("CustomizeQRCodeGeneratingURL") == false || app.getProperty("QRCodeGeneratingURL") == null || app.getProperty("QRCodeGeneratingURL").length() == 0) {
+		if(app.getProperty("CustomizeQRCodeGeneratingURL") == false || isNullOrEmpty(app.getProperty("QRCodeGeneratingURL"))) {
 			app.setProperty("QRCodeGeneratingURL", Ui.loadResource(Rez.Strings.defaultQRCodeGeneratingURL));
 		}
 	}
