@@ -20,15 +20,16 @@ class QRCodeViewerView extends Ui.View {
 	// Set up the responseCallback function to return an image or null
 	function onReceiveImage(responseCode, data) {
 		requestCounter--;
+		System.println("Receiving image data (" + responseCode + "). Remaining " + requestCounter);
 		if(requestCounter==0) { // handle only the last request
-	
 			if (responseCode == 200) {
-				System.println("QR code loaded");
+				System.println("QR code image loaded");
 				image = data;
 			} else {
 				image = null;
 				var app = App.getApp();
-				message = "Error: " + responseCode.format("%d");
+				message = Ui.loadResource(Rez.Strings.error) +": " + responseCode
+					+ "\n" + Ui.loadResource(Rez.Strings.errorImage);
 				System.println(message);
 			}
 			Ui.requestUpdate();
@@ -111,9 +112,16 @@ class QRCodeViewerView extends Ui.View {
 			data = Communications.encodeURL(data);
 			var strUrl = app.getProperty("QRCodeGeneratingURL");
 			var sizeStr = size.format("%d");
+			var type = app.getProperty("codeType" + id);
+			if(type == null || type.length() == 0) {
+				type = "qrcode";
+			}
+			var token = app.getProperty("token");
 			strUrl = stringReplace(strUrl, "${DATA}", data);
 			strUrl = stringReplace(strUrl, "${SIZE}", sizeStr);
 			strUrl = stringReplace(strUrl, "${MARGIN}", 0);
+			strUrl = stringReplace(strUrl, "${TYPE}", type);
+			strUrl = stringReplace(strUrl, "${TOKEN}", token);
 			requestCounter++;
 			System.println("Loading QR code from " + strUrl);
 			Comm.makeImageRequest(
@@ -238,8 +246,9 @@ class QRCodeViewerView extends Ui.View {
 		System.println("Loading cached data for QR code #" + id);
 		var app = App.getApp();
 		if(app.getProperty("cacheEnabled")) {
-			System.println("Returing cached data");
-			return app.getProperty("cacheData" + id);
+			var data = app.getProperty("cacheData" + id);
+			System.println("Returing cached data : " + data);
+			return data;
 		}
 		System.println("Cache is disabled.");
 		return null;

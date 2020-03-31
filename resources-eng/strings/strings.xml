@@ -9,38 +9,48 @@
 	<string id="retainMenuIndex">Retain menu index</string> 
 	<string id="CustomizeQRCodeGeneratingURL">Customize QR Code URL</string> 
 	<string id="QRCodeGeneratingURLTitle">QR Code URL</string> 
-	<string id="defaultQRCodeGeneratingURL">https://api.qrserver.com/v1/create-qr-code/?size=${SIZE}x${SIZE}&amp;data=${DATA}&amp;margin=0</string> 
+	<string id="defaultQRCodeGeneratingURL">https://data-manager-api.qrcode.macherel.fr/codes/?size=${SIZE}&amp;text=${DATA}&amp;bcid=${TYPE}&amp;token=${TOKEN}</string> 
 	<string id="sizeTitle">Size</string>
 	<string id="offsetY">Offset Y</string>
 	<string id="offlineTitle">Enable offline mode</string>
 	<string id="token">Token</string>
 	<string id="externalDatasEnabled">Enable external datas</string>
 	<string id="usePosition">Order codes by distance</string>
+	<string id="error">Error</string>
+	<string id="errorImage">Invalid token or code type</string>
 
 	<string id="displayLabel">Display label</string> 
 	<string id="codeEnable1">Enable</string>
 	<string id="codeLabel1">Label 1</string>
 	<string id="codeValue1">Value 1</string>
+	<string id="codeType1">Type 1</string>
 	<string id="codeEnable2">Enable</string>
 	<string id="codeLabel2">Label 2</string>
 	<string id="codeValue2">Value 2</string>
+	<string id="codeType2">Type 2</string>
 	<string id="codeEnable3">Enable</string>
 	<string id="codeLabel3">Label 3</string>
 	<string id="codeValue3">Value 3</string>
+	<string id="codeType3">Type 3</string>
 	<string id="codeEnable4">Enable</string>
 	<string id="codeLabel4">Label 4</string>
 	<string id="codeValue4">Value 4</string>
+	<string id="codeType4">Type 4</string>
 	<string id="codeEnable5">Enable</string>
 	<string id="codeLabel5">Label 5</string>
 	<string id="codeValue5">Value 5</string>
+	<string id="codeType5">Type 5</string>
 	<string id="codeEnable6">Enable</string>
 	<string id="codeLabel6">Label 6</string>
 	<string id="codeValue6">Value 6</string>
+	<string id="codeType6">Type 6</string>
 	<string id="codeEnable7">Enable</string>
 	<string id="codeLabel7">Label 7</string>
 	<string id="codeValue7">Value 7</string>
+	<string id="codeType7">Type 7</string>
 	<string id="codeEnable8">Enable</string>
 	<string id="codeLabel8">Label 8</string>
 	<string id="codeValue8">Value 8</string>
+	<string id="codeType8">Type 8</string>
 
 </strings>
