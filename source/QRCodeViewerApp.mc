@@ -131,6 +131,7 @@ class QRCodeViewerApp extends App.AppBase {
 				var id = i+1;
 				app.setProperty("codeEnable" + id, true);
 				app.setProperty("codeLabel"  + id, qrCodes[i]["name"]);
+				app.setProperty("codeType"   + id, qrCodes[i]["type"]);
 				app.setProperty("codeValue"  + id, qrCodes[i]["value"]);
 				app.setProperty("cacheValue" + id, qrCodes[i]["value"]);
 				app.setProperty("cacheData"  + id, qrCodes[i]["encodedData"]);
