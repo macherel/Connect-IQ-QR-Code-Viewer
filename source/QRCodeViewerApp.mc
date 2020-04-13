@@ -68,10 +68,14 @@ class QRCodeViewerApp extends App.AppBase {
 		var token = app.getProperty("token");
 		if(app.getProperty("cacheEnabled") && (!isNullOrEmpty(token) || id==1)) {
 			loadingCache++;
+			var type = app.getProperty("codeType" + id);
+			if(isNullOrEmpty(type)) {
+				type = "qrcode";
+			}
 			var strUrl = "https://data-manager-api.qrcode.macherel.fr/codes/";
 			strUrl += "?id=" + Communications.encodeURL(id.format("%d"));
 			strUrl += "&text=" + Communications.encodeURL(app.getProperty("codeValue" + id));
-			strUrl += "&bcid=" + Communications.encodeURL(app.getProperty("codeType" + id));
+			strUrl += "&bcid=" + Communications.encodeURL(type);
 			strUrl += "&token=" + Communications.encodeURL(token);
 			System.println("Loading cached data #" + id + " from " + strUrl);
 			Comm.makeWebRequest(

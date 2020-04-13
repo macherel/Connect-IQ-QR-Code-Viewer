@@ -3,35 +3,35 @@
 	<property id="codeEnable1" type="boolean">false</property>
 	<property id="codeLabel1" type="string"></property>
 	<property id="codeValue1" type="string"></property>
-	<property id="codeType1" type="string"></property>
+	<property id="codeType1" type="string">qrcode</property>
 	<property id="codeEnable2" type="boolean">false</property>
 	<property id="codeLabel2" type="string"></property>
 	<property id="codeValue2" type="string"></property>
-	<property id="codeType2" type="string"></property>
+	<property id="codeType2" type="string">qrcode</property>
 	<property id="codeEnable3" type="boolean">false</property>
 	<property id="codeLabel3" type="string"></property>
 	<property id="codeValue3" type="string"></property>
-	<property id="codeType3" type="string"></property>
+	<property id="codeType3" type="string">qrcode</property>
 	<property id="codeEnable4" type="boolean">false</property>
 	<property id="codeLabel4" type="string"></property>
 	<property id="codeValue4" type="string"></property>
-	<property id="codeType4" type="string"></property>
+	<property id="codeType4" type="string">qrcode</property>
 	<property id="codeEnable5" type="boolean">false</property>
 	<property id="codeLabel5" type="string"></property>
 	<property id="codeValue5" type="string"></property>
-	<property id="codeType5" type="string"></property>
+	<property id="codeType5" type="string">qrcode</property>
 	<property id="codeEnable6" type="boolean">false</property>
 	<property id="codeLabel6" type="string"></property>
 	<property id="codeValue6" type="string"></property>
-	<property id="codeType6" type="string"></property>
+	<property id="codeType6" type="string">qrcode</property>
 	<property id="codeEnable7" type="boolean">false</property>
 	<property id="codeLabel7" type="string"></property>
 	<property id="codeValue7" type="string"></property>
-	<property id="codeType7" type="string"></property>
+	<property id="codeType7" type="string">qrcode</property>
 	<property id="codeEnable8" type="boolean">false</property>
 	<property id="codeLabel8" type="string"></property>
 	<property id="codeValue8" type="string"></property>
-	<property id="codeType8" type="string"></property>
+	<property id="codeType8" type="string">qrcode</property>
 	<property id="retainMenuIndex" type="boolean">false</property>
 	<property id="CustomizeQRCodeGeneratingURL" type="boolean">false</property>
 	<property id="QRCodeGeneratingURL" type="string"></property>
