@@ -1,4 +1,11 @@
 <settings>
+	<setting propertyKey="@Properties.token" title="@Strings.token"> 
+		<settingConfig type="alphaNumeric" />
+	</setting>
+	<setting propertyKey="@Properties.externalDatasEnabled" title="@Strings.externalDatasEnabled"> 
+		<settingConfig type="boolean" />
+	</setting>
+
 	<setting propertyKey="@Properties.displayLabel" title="@Strings.displayLabel">
 		<settingConfig type="boolean" />
 	</setting>
@@ -119,16 +126,13 @@
 	<setting propertyKey="@Properties.size" title="@Strings.sizeTitle"> 
 		<settingConfig type="numeric" />
 	</setting>
+	<setting propertyKey="@Properties.barcodeHeight" title="@Strings.barcodeHeightTitle"> 
+		<settingConfig type="numeric" />
+	</setting>
 	<setting propertyKey="@Properties.offsetY" title="@Strings.offsetY"> 
 		<settingConfig type="numeric" />
 	</setting>
 	<setting propertyKey="@Properties.cacheEnabled" title="@Strings.offlineTitle"> 
-		<settingConfig type="boolean" />
-	</setting>
-	<setting propertyKey="@Properties.token" title="@Strings.token"> 
-		<settingConfig type="alphaNumeric" />
-	</setting>
-	<setting propertyKey="@Properties.externalDatasEnabled" title="@Strings.externalDatasEnabled"> 
 		<settingConfig type="boolean" />
 	</setting>
 	<setting propertyKey="@Properties.usePosition" title="@Strings.usePosition"> 
