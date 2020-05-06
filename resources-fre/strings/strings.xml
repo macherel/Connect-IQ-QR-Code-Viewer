@@ -11,6 +11,7 @@
 	<string id="QRCodeGeneratingURLTitle">URL de génération du QR Code</string> 
 	<string id="defaultQRCodeGeneratingURL">https://data-manager-api.qrcode.macherel.fr/codes/?size=${SIZE}&amp;text=${DATA}&amp;bcid=${TYPE}&amp;token=${TOKEN}</string> 
 	<string id="sizeTitle">Taille</string>
+	<string id="barcodeHeightTitle">Hauteur des codes-barres</string>
 	<string id="offsetY">Offset Y</string>
 	<string id="offlineTitle">Mode déconnecté</string>
 	<string id="token">Token</string>

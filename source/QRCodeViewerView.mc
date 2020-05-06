@@ -218,7 +218,11 @@ class QRCodeViewerView extends Ui.View {
 		var app = App.getApp();
 		var nbLines = datas.size();
 		if(nbLines == 1) {
-			nbLines = 18 / moduleSize;
+			var barcodeHeight = app.getProperty("barcodeHeight");
+			if(barcodeHeight == 0) {
+				barcodeHeight = dc.getHeight()/10;
+			}
+			nbLines = barcodeHeight / moduleSize;
 		}
 		var offsetY = (dc.getHeight() - (nbLines-1) * 4 * moduleSize) / 2 + offsetHeight + app.getProperty("offsetY");
 		for(var i=0; i<nbLines; i++) {
