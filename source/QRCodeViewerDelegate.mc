@@ -33,4 +33,35 @@ class QRCodeViewerDelegate extends Ui.BehaviorDelegate {
 		return true;
 	}
 	function onMenu() {	return onSelect(); }
+	
+	function onSwipe(swipeEvent) {
+			switch(swipeEvent.getDirection()) {
+				case WatchUi.SWIPE_LEFT:
+					break;
+				default:
+					return false;
+			}
+		var app = App.getApp();
+		var currentId = app.getProperty("currentId");
+		var index = -1;
+		for(var i=0; i<app.enabledCodeIds.size(); i++) {
+			var id = app.enabledCodeIds[i];
+			if(id == currentId) {
+				index = i;
+			}
+		}
+		if(index != -1) {
+			var transition = Ui.SLIDE_IMMEDIATE;
+			switch(swipeEvent.getDirection()) {
+				case WatchUi.SWIPE_LEFT:
+					index++;
+					transition = Ui.SLIDE_LEFT;
+					break;
+			}
+			index = (index+app.enabledCodeIds.size()) % app.enabledCodeIds.size();
+			app.setProperty("currentId", app.enabledCodeIds[index]);
+			Ui.switchToView(new QRCodeViewerView(), new QRCodeViewerDelegate(), transition);
+		}
+		return true;
+	}
 }
