@@ -96,28 +96,20 @@ class QRCodeViewerApp extends App.AppBase {
 	
 	function initQRCodeSettings(id) {
 		var app = App.getApp();
-		var enable = app.getProperty("codeEnable"  + id);
-		var label  = app.getProperty("codeLabel"   + id);
-		var value  = app.getProperty("codeValue"   + id);
+		var code = Code.fromSettings(id);
 		var cacheValue = app.getProperty("cacheValue" + id);
-		if(value == null || !value.equals(cacheValue)) {
+		if(code.value == null || !code.value.equals(cacheValue)) {
 			// Reset cached value
 			cacheValue = null;
 			app.setProperty("cacheData" + id, null);
 		}
-		if(enable && !isNullOrEmpty(label) && !isNullOrEmpty(value)) {
+		if(code.enabled && !isNullOrEmpty(code.label) && !isNullOrEmpty(code.value)) {
 			// The QR Code exist, we have to handle with it
-			if(value != null && !value.equals(cacheValue)) {
+			if(code.value != null && !code.value.equals(cacheValue)) {
 				loadQRCodeData(id);
 			}
 			System.println("Add QR code #" + id);
-			enabledCodes.add({
-				:id => id,
-				:label => label,
-				:value => value,
-				:lat => app.getProperty("codeLat" + id),
-				:lng => app.getProperty("codeLng" + id)
-			});
+			enabledCodes.add(code);
 		} else if(app.getProperty("currentId") == id) {
 			System.println("Reset currentId");
 			app.setProperty("currentId", null);
@@ -142,14 +134,7 @@ class QRCodeViewerApp extends App.AppBase {
 			var qrCodes = data["qrcodes"];
 			for(var i=0; i<8 && i<qrCodes.size(); i++) {
 				var id = i+1;
-				app.setProperty("codeEnable" + id, true);
-				app.setProperty("codeLabel"  + id, qrCodes[i]["name"]);
-				app.setProperty("codeType"   + id, qrCodes[i]["type"]);
-				app.setProperty("codeValue"  + id, qrCodes[i]["value"]);
-				app.setProperty("cacheValue" + id, qrCodes[i]["value"]);
-				app.setProperty("cacheData"  + id, qrCodes[i]["encodedData"]);
-				app.setProperty("codeLat"    + id, qrCodes[i]["latlng"]["lat"]);
-				app.setProperty("codeLng"    + id, qrCodes[i]["latlng"]["lng"]);
+				Code.fromResponseData(id, qrCodes[i]).store();
 				System.println("QR code #" + id + " \"" + qrCodes[i]["name"] + "\" received.");
 			}
 			initQRCodes();
@@ -228,6 +213,9 @@ class QRCodeViewerApp extends App.AppBase {
 	function onSettingsChanged() {
 		AppBase.onSettingsChanged();
 		handleSettings();
+	}
+
+	function orderCodes() {
 	}
 
 	// onStart() is called on application start up

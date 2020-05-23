@@ -16,10 +16,10 @@ class QRCodeViewerDelegate extends Ui.BehaviorDelegate {
 			var menuIndex = 0;
 			for(var i=0; i<app.enabledCodes.size(); i++) {
 				var code = app.enabledCodes[i];
-				if(code[:id] == currentId) {
+				if(code.id == currentId) {
 					menuIndex = i;
 				}
-				qrCodesMenu.add(new DMenuItem(i, code[:label], code[:value], code[:id]));
+				qrCodesMenu.add(new DMenuItem(i, code.label, code.value, code.id));
 			}
 			var view = new DMenu(qrCodesMenu, Ui.loadResource(Rez.Strings.mainMenuTitle));
 			if(app.getProperty("retainMenuIndex")) {
@@ -48,7 +48,7 @@ class QRCodeViewerDelegate extends Ui.BehaviorDelegate {
 		var currentId = app.getProperty("currentId");
 		var index = -1;
 		for(var i=0; i<app.enabledCodes.size(); i++) {
-			var id = app.enabledCodes[i] == null ? -1 : app.enabledCodes[i][:id];
+			var id = app.enabledCodes[i] == null ? -1 : app.enabledCodes[i].id;
 			if(id == currentId) {
 				index = i;
 			}
@@ -62,7 +62,7 @@ class QRCodeViewerDelegate extends Ui.BehaviorDelegate {
 				break;
 		}
 		index = (index + app.enabledCodes.size()) % app.enabledCodes.size();
-		app.setProperty("currentId", app.enabledCodes[index][:id]);
+		app.setProperty("currentId", app.enabledCodes[index].id);
 		Ui.switchToView(new QRCodeViewerView(), new QRCodeViewerDelegate(), transition);
 
 		return true;
