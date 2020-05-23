@@ -147,7 +147,7 @@ class QRCodeViewerView extends Ui.View {
 		var id      = app.getProperty("currentId");
 		var data    = getCachedData(id);
 		if(id == null || message == null) {
-			if(app.enabledCodeIds.size() == 0) {
+			if(app.enabledCodes.size() == 0) {
 				message = Ui.loadResource(Rez.Strings.errorNoQRCode);
 			} else {
 				message = Ui.loadResource(Rez.Strings.selectQRCode);
@@ -202,6 +202,7 @@ class QRCodeViewerView extends Ui.View {
 				);
 			}
 		}
+		updateStatus(dc);
 		System.println("View updated.");			
 	}
 
@@ -209,6 +210,33 @@ class QRCodeViewerView extends Ui.View {
 	// state of this View here. This includes freeing resources from
 	// memory.
 	function onHide() {
+	}
+	
+	function updateStatus(dc) {
+		var status = App.getApp().status;
+		var color = Gfx.COLOR_RED;
+		switch(status) {
+			case :UNKNOWN:
+				System.println("status UNKNOWN");
+				return false;
+			case :READY:
+				System.println("status READY");
+				return false;
+			case :WAITING_POSITION:
+				System.println("status WAITING_POSITION");
+				color = Gfx.COLOR_DK_GREEN;
+				break;
+			case :WAITING_CODES:
+				System.println("status WAITING_CODES");
+				color = Gfx.COLOR_BLUE;
+				break;
+			default:
+				System.println("other status");
+		}
+		dc.setColor(color, Gfx.COLOR_BLACK);
+		dc.setPenWidth(dcHeight * 0.05);
+		dc.drawRectangle(0, 0, dcWidth, dcHeight);
+		return true;
 	}
 
 	function drawQRCode(dc, datas, moduleSize) {

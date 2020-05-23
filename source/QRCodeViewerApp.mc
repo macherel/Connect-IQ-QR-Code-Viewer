@@ -4,9 +4,10 @@ using Toybox.Communications as Comm;
 
 class QRCodeViewerApp extends App.AppBase {
 
-	var enabledCodeIds = [];
+	var enabledCodes = [];
 	var loadingCache = 0;
 	var latlng = null;
+	var status = :UNKNOWN;
 
 	function isNullOrEmpty(str) {
 		return str == null || str.length() == 0;
@@ -110,18 +111,26 @@ class QRCodeViewerApp extends App.AppBase {
 				loadQRCodeData(id);
 			}
 			System.println("Add QR code #" + id);
-			enabledCodeIds.add(id);
+			enabledCodes.add({
+				:id => id,
+				:label => label,
+				:value => value,
+				:lat => app.getProperty("codeLat" + id),
+				:lng => app.getProperty("codeLng" + id)
+			});
 		} else if(app.getProperty("currentId") == id) {
+			System.println("Reset currentId");
 			app.setProperty("currentId", null);
 		}
 	}
 
 	function initQRCodes() {
-		enabledCodeIds = [];
+		enabledCodes = [];
 		for(var i=1; i<=8; i++) {
 			initQRCodeSettings(i);
 		}
 		if(loadingCache==0) {
+			setStatus(:READY);
 			Ui.requestUpdate();
 		}
 	}
@@ -139,6 +148,8 @@ class QRCodeViewerApp extends App.AppBase {
 				app.setProperty("codeValue"  + id, qrCodes[i]["value"]);
 				app.setProperty("cacheValue" + id, qrCodes[i]["value"]);
 				app.setProperty("cacheData"  + id, qrCodes[i]["encodedData"]);
+				app.setProperty("codeLat"    + id, qrCodes[i]["latlng"]["lat"]);
+				app.setProperty("codeLng"    + id, qrCodes[i]["latlng"]["lng"]);
 				System.println("QR code #" + id + " \"" + qrCodes[i]["name"] + "\" received.");
 			}
 			initQRCodes();
@@ -157,6 +168,7 @@ class QRCodeViewerApp extends App.AppBase {
 		}
 
 		System.println("Loading QR codes...");
+		setStatus(:WAITING_CODES);
 		var app = App.getApp();
 		var strUrl = "https://data-manager-api.qrcode.macherel.fr/users/" + app.getProperty("token");
 		if(latlng != null && canUseExternalDataWithPosition()) {
@@ -185,6 +197,7 @@ class QRCodeViewerApp extends App.AppBase {
 		initQRCodes();
 		if(canUseExternalDataWithPosition()) {
 			System.println("Requesting position...");
+			setStatus(:WAITING_POSITION);
 			Position.enableLocationEvents(Position.LOCATION_ONE_SHOT, method(:onPosition));
 		} else if(canUseExternalData()) {
 			loadQRCodes();
@@ -205,6 +218,11 @@ class QRCodeViewerApp extends App.AppBase {
 		}
 		handleSettings();
 		System.println("App initialized.");
+	}
+	
+	function setStatus(newStatus) {
+		status = newStatus;
+		Ui.requestUpdate();
 	}
 
 	function onSettingsChanged() {
