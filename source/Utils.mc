@@ -12,3 +12,7 @@ function stringReplace(str, oldString, newString)
 
 	return result;
 }
+
+function isNullOrEmpty(str) {
+	return str == null || str.length() == 0;
+}

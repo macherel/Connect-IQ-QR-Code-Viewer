@@ -38,13 +38,13 @@ class Code {
 		var app = App.getApp();
 		return new Code(
 			id,
-			app.getProperty("codeEnable"  + id),
+			app.getProperty("codeEnable"+ id),
 			app.getProperty("codeType"  + id),
-			app.getProperty("codeLabel"   + id),
-			app.getProperty("codeValue"   + id),
-			app.getProperty("cacheValue" + id),
-			app.getProperty("codeLat" + id),
-			app.getProperty("codeLng" + id)
+			app.getProperty("codeLabel" + id),
+			app.getProperty("codeValue" + id),
+			app.getProperty("cacheValue"+ id),
+			app.getProperty("codeLat"   + id),
+			app.getProperty("codeLng"   + id)
 		);
 	}
 

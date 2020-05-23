@@ -74,7 +74,7 @@ class QRCodeViewerView extends Ui.View {
 	function onShow() {
 		System.println("View.onShow");	
 		var app = App.getApp();
-		var id = app.getProperty("currentId");
+		var id = Settings.currentId;
 		if(id == null) {
 			// nothing to show...
 			System.println("View.onShow - nothing to show");	
@@ -89,7 +89,7 @@ class QRCodeViewerView extends Ui.View {
 			maxHeight = maxHeight * 0.8;
 		}
 
-		if(app.getProperty("displayLabel")) {
+		if(Settings.displayLabel) {
 			var fontHeight = Gfx.getFontHeight(Gfx.FONT_MEDIUM);
 			var marginTop = (dcHeight - maxHeight) / 2;
 			if(marginTop < fontHeight) {
@@ -98,7 +98,7 @@ class QRCodeViewerView extends Ui.View {
 			}
 		}
 
-		size = app.getProperty("size");
+		size = Settings.size;
 		if(size == 0) {
 			size = maxWidth<maxHeight?maxWidth:maxHeight;
 		}
@@ -144,7 +144,7 @@ class QRCodeViewerView extends Ui.View {
 		View.onUpdate(dc);
 
 		var app = App.getApp();
-		var id      = app.getProperty("currentId");
+		var id      = Settings.currentId;
 		var data    = getCachedData(id);
 		if(id == null || message == null) {
 			if(app.enabledCodes.size() == 0) {
@@ -178,7 +178,7 @@ class QRCodeViewerView extends Ui.View {
 			}
 			dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 			dc.clear();
-			if(app.getProperty("displayLabel")) {
+			if(Settings.displayLabel) {
 				System.println("Display label");
 				dc.setColor (Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
 				dc.drawText(
@@ -246,13 +246,13 @@ class QRCodeViewerView extends Ui.View {
 		var app = App.getApp();
 		var nbLines = datas.size();
 		if(nbLines == 1) {
-			var barcodeHeight = app.getProperty("barcodeHeight");
+			var barcodeHeight = Settings.barcodeHeight;
 			if(barcodeHeight == 0) {
 				barcodeHeight = dc.getHeight()/10;
 			}
 			nbLines = barcodeHeight / moduleSize;
 		}
-		var offsetY = (dc.getHeight() - (nbLines-1) * 4 * moduleSize) / 2 + offsetHeight + app.getProperty("offsetY");
+		var offsetY = (dc.getHeight() - (nbLines-1) * 4 * moduleSize) / 2 + offsetHeight + Settings.offsetY;
 		for(var i=0; i<nbLines; i++) {
 			dc.drawText(
 					(dc.getWidth()) / 2,
@@ -268,7 +268,7 @@ class QRCodeViewerView extends Ui.View {
 					(dc.getWidth()) / 2,
 					offsetY + (nbLines * 4 * moduleSize),
 					Gfx.FONT_XTINY,
-					app.getProperty("codeValue" + app.getProperty("currentId")),
+					app.getProperty("codeValue" + Settings.currentId),
 					Gfx.TEXT_JUSTIFY_CENTER
 			);
 		}
