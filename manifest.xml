@@ -12,6 +12,7 @@
             <iq:product id="descentmk1"/>
             <iq:product id="edge1030"/>
             <iq:product id="edge1030bontrager"/>
+            <iq:product id="edge1030plus"/>
             <iq:product id="edge520plus"/>
             <iq:product id="edge530"/>
             <iq:product id="edge820"/>
@@ -57,9 +58,11 @@
             <iq:product id="marqcommander"/>
             <iq:product id="marqdriver"/>
             <iq:product id="marqexpedition"/>
+            <iq:product id="marqgolfer"/>
             <iq:product id="oregon7xx"/>
             <iq:product id="rino7xx"/>
             <iq:product id="venu"/>
+            <iq:product id="venud"/>
             <iq:product id="vivoactive"/>
             <iq:product id="vivoactive3"/>
             <iq:product id="vivoactive3d"/>
