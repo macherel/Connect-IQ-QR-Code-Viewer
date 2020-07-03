@@ -178,6 +178,7 @@ class QRCodeViewerView extends Ui.View {
 				    imageFontSize++
 				) {
 				}
+				System.println("Code will be displayed using font size " + imageFontSize);
 			}
 			dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 			dc.clear();
