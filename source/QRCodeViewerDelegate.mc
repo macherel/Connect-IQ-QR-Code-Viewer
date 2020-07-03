@@ -10,19 +10,18 @@ class QRCodeViewerDelegate extends Ui.BehaviorDelegate {
 	function onSelect() {
 		var app = App.getApp();
 		
-		if(app.enabledCodeIds.size() > 0) {
+		if(app.enabledCodes.size() > 0) {
 			var qrCodesMenu = [];
-			var currentId = app.getProperty("currentId");
 			var menuIndex = 0;
-			for(var i=0; i<app.enabledCodeIds.size(); i++) {
-				var id = app.enabledCodeIds[i];
-				if(id == currentId) {
+			for(var i=0; i<app.enabledCodes.size(); i++) {
+				var code = app.enabledCodes[i];
+				if(code.id == Settings.currentId) {
 					menuIndex = i;
 				}
-				qrCodesMenu.add(new DMenuItem(i, app.getProperty("codeLabel" + id), app.getProperty("codeValue" + id), id));
+				qrCodesMenu.add(new DMenuItem(i, code.label, code.value, code.id));
 			}
 			var view = new DMenu(qrCodesMenu, Ui.loadResource(Rez.Strings.mainMenuTitle));
-			if(app.getProperty("retainMenuIndex")) {
+			if(Settings.retainMenuIndex) {
 				view.updateIndex(menuIndex);
 			}
 
@@ -33,4 +32,31 @@ class QRCodeViewerDelegate extends Ui.BehaviorDelegate {
 		return true;
 	}
 	function onMenu() {	return onSelect(); }
+	
+	function onSwipe(swipeEvent) {
+		switch(swipeEvent.getDirection()) {
+			case WatchUi.SWIPE_LEFT:
+				break;
+			default:
+				return false;
+		}
+		var app = App.getApp();
+		if(app.enabledCodes.size() == 0) {
+			return true;
+		}
+		
+		var index = app.getCodeIndex(Settings.currentId);
+		var transition = Ui.SLIDE_IMMEDIATE;
+		switch(swipeEvent.getDirection()) {
+			case WatchUi.SWIPE_LEFT:
+				index++;
+				transition = Ui.SLIDE_LEFT;
+				break;
+		}
+		index = (index + app.enabledCodes.size()) % app.enabledCodes.size();
+		Settings.setCurrentId(app.enabledCodes[index].id);
+		Ui.switchToView(new QRCodeViewerView(), new QRCodeViewerDelegate(), transition);
+
+		return true;
+	}
 }

@@ -8,9 +8,8 @@ class QrCodeViewerMenuDelegate extends Ui.MenuInputDelegate {
 	}
 
 	function onMenuItem (item) {
-		var app = App.getApp();
-		var id = item.userData;
-		app.setProperty("currentId", id);
+		System.println("Select code #" + item.userData);
+		Settings.setCurrentId(item.userData);
 		Ui.popView(Ui.SLIDE_IMMEDIATE);
 	}
 }

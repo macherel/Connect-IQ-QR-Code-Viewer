@@ -4,28 +4,14 @@ using Toybox.Communications as Comm;
 
 class QRCodeViewerApp extends App.AppBase {
 
-	var enabledCodeIds = [];
+	var enabledCodes = [];
 	var loadingCache = 0;
 	var latlng = null;
+	var status = :UNKNOWN;
 
-	function isNullOrEmpty(str) {
-		return str == null || str.length() == 0;
-	}
-
-	function hasToken() {
-		var app = App.getApp();
-			return !isNullOrEmpty(app.getProperty("token"));
-	}
-
-	function canUseExternalData() {
-		var app = App.getApp();
-		return app.getProperty("externalDatasEnabled") && hasToken();
-	}
-	function canUseExternalDataWithPosition() {
-		var app = App.getApp();
-		return app.getProperty("usePosition")
-			&& canUseExternalData();
-	}
+	////////////////////////////////////////////////////////////////
+	// Callbacks
+	////////////////////////////////////////////////////////////////
 
 	function onPosition(info) {
 		System.println("Position received : " + info);
@@ -60,22 +46,47 @@ class QRCodeViewerApp extends App.AppBase {
 		}
 	}
 	
-	function loadQRCodeData(id) {
+	function onReceiveQRCodes(responseCode, data) {
+		System.println("Receiving QR codes...");
+		var app = App.getApp();
+		if (responseCode == 200 && data != null) {
+			var qrCodes = data["qrcodes"];
+			for(var i=0; i<8 && i<qrCodes.size(); i++) {
+				var id = i+1;
+				Code.fromResponseData(id, qrCodes[i]).store();
+				System.println("QR code #" + id + " \"" + qrCodes[i]["name"] + "\" received.");
+			}
+			initQRCodes();
+		} else {
+			System.println("Error while loading QR codes (" + responseCode + ")");
+			// nothing to do, data will be loaded next time
+		}
+	}
+
+	////////////////////////////////////////////////////////////////
+	// Private methods
+	////////////////////////////////////////////////////////////////
+	
+	function getCodeIndex(id) {
+		for(var i=0; i<enabledCodes.size(); i++) {
+			if(enabledCodes[i].id == id) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	function loadQRCodeData(code) {
+		var id = code.id;
 		System.println("Initialize QR code #" + id);
 		var app = App.getApp();
-		app.setProperty("cacheValue" + id, null);
-		app.setProperty("cacheData"  + id, null);
-		var token = app.getProperty("token");
-		if(app.getProperty("cacheEnabled") && (!isNullOrEmpty(token) || id==1)) {
+		var token = Settings.token;
+		if(Settings.cacheEnabled && (!isNullOrEmpty(token) || id==1)) {
 			loadingCache++;
-			var type = app.getProperty("codeType" + id);
-			if(isNullOrEmpty(type)) {
-				type = "qrcode";
-			}
 			var strUrl = "https://data-manager-api.qrcode.macherel.fr/codes/";
 			strUrl += "?id=" + Communications.encodeURL(id.format("%d"));
-			strUrl += "&text=" + Communications.encodeURL(app.getProperty("codeValue" + id));
-			strUrl += "&bcid=" + Communications.encodeURL(type);
+			strUrl += "&text=" + Communications.encodeURL(code.value);
+			strUrl += "&bcid=" + Communications.encodeURL(code.type);
 			strUrl += "&token=" + Communications.encodeURL(token);
 			System.println("Loading cached data #" + id + " from " + strUrl);
 			Comm.makeWebRequest(
@@ -95,56 +106,33 @@ class QRCodeViewerApp extends App.AppBase {
 	
 	function initQRCodeSettings(id) {
 		var app = App.getApp();
-		var enable = app.getProperty("codeEnable"  + id);
-		var label  = app.getProperty("codeLabel"   + id);
-		var value  = app.getProperty("codeValue"   + id);
-		var cacheValue = app.getProperty("cacheValue" + id);
-		if(value == null || !value.equals(cacheValue)) {
-			// Reset cached value
-			cacheValue = null;
-			app.setProperty("cacheData" + id, null);
-		}
-		if(enable && !isNullOrEmpty(label) && !isNullOrEmpty(value)) {
+		var code = Code.fromSettings(id);
+		System.println("Initialize code " + code);
+		var cacheValue = code.cache;
+		if(code.enabled && !isNullOrEmpty(code.label) && !isNullOrEmpty(code.value)) {
 			// The QR Code exist, we have to handle with it
-			if(value != null && !value.equals(cacheValue)) {
-				loadQRCodeData(id);
+			if(code.value != null && code.cache == null) {
+				loadQRCodeData(code);
 			}
 			System.println("Add QR code #" + id);
-			enabledCodeIds.add(id);
-		} else if(app.getProperty("currentId") == id) {
-			app.setProperty("currentId", null);
+			enabledCodes.add(code);
+		} else if(Settings.currentId == id) {
+			System.println("Reset currentId");
+			Settings.setCurrentId(null);
+		} else  {
+			System.println("Code not loaded");
 		}
 	}
 
 	function initQRCodes() {
-		enabledCodeIds = [];
+		System.println("init QR codes...");
+		enabledCodes = [];
 		for(var i=1; i<=8; i++) {
 			initQRCodeSettings(i);
 		}
 		if(loadingCache==0) {
+			setStatus(:READY);
 			Ui.requestUpdate();
-		}
-	}
-
-	function onReceiveQRCodes(responseCode, data) {
-		System.println("Receiving QR codes...");
-		var app = App.getApp();
-		if (responseCode == 200 && data != null) {
-			var qrCodes = data["qrcodes"];
-			for(var i=0; i<8 && i<qrCodes.size(); i++) {
-				var id = i+1;
-				app.setProperty("codeEnable" + id, true);
-				app.setProperty("codeLabel"  + id, qrCodes[i]["name"]);
-				app.setProperty("codeType"   + id, qrCodes[i]["type"]);
-				app.setProperty("codeValue"  + id, qrCodes[i]["value"]);
-				app.setProperty("cacheValue" + id, qrCodes[i]["value"]);
-				app.setProperty("cacheData"  + id, qrCodes[i]["encodedData"]);
-				System.println("QR code #" + id + " \"" + qrCodes[i]["name"] + "\" received.");
-			}
-			initQRCodes();
-		} else {
-			System.println("Error while loading QR codes (" + responseCode + ")");
-			// nothing to do, data will be loaded next time
 		}
 	}
 
@@ -152,14 +140,15 @@ class QRCodeViewerApp extends App.AppBase {
 	 * Load QR codes from webservice
 	 */
 	function loadQRCodes() {
-		if(!canUseExternalData()) {
+		if(!Settings.canUseExternalData()) {
 			return;
 		}
 
 		System.println("Loading QR codes...");
+		setStatus(:WAITING_CODES);
 		var app = App.getApp();
-		var strUrl = "https://data-manager-api.qrcode.macherel.fr/users/" + app.getProperty("token");
-		if(latlng != null && canUseExternalDataWithPosition()) {
+		var strUrl = "https://data-manager-api.qrcode.macherel.fr/users/" + Settings.token;
+		if(latlng != null && Settings.canUseExternalDataWithPosition()) {
 			strUrl += "?lat=" + latlng[:lat];
 			strUrl += "&lng=" + latlng[:lng];
 		}
@@ -183,26 +172,35 @@ class QRCodeViewerApp extends App.AppBase {
 		System.println("Handle settings...");
 		var app = App.getApp();
 		initQRCodes();
-		if(canUseExternalDataWithPosition()) {
+		if(Settings.canUseExternalDataWithPosition()) {
 			System.println("Requesting position...");
+			setStatus(:WAITING_POSITION);
 			Position.enableLocationEvents(Position.LOCATION_ONE_SHOT, method(:onPosition));
-		} else if(canUseExternalData()) {
+		} else if(Settings.canUseExternalData()) {
 			loadQRCodes();
 		}
-		if(app.getProperty("CustomizeQRCodeGeneratingURL") == false || isNullOrEmpty(app.getProperty("QRCodeGeneratingURL"))) {
-			app.setProperty("QRCodeGeneratingURL", Ui.loadResource(Rez.Strings.defaultQRCodeGeneratingURL));
-		}
 	}
+
+	function setStatus(newStatus) {
+		if(status == newStatus) {
+			return;
+		}
+		System.println("set status : " + newStatus);
+		status = newStatus;
+		Ui.requestUpdate();
+	}
+
+	function orderCodes() {
+	}
+
+	////////////////////////////////////////////////////////////////
+	// Public methods
+	////////////////////////////////////////////////////////////////
 
 	function initialize() {
 		System.println("App initialization...");
 		AppBase.initialize();
-		var app = App.getApp();
-		// Force default value for old version
-		if(app.getProperty("liVersion")==null) {
-			app.setProperty("liVersion", 0);
-			app.setProperty("cacheEnabled", true);
-		}
+		Settings.load();
 		handleSettings();
 		System.println("App initialized.");
 	}
