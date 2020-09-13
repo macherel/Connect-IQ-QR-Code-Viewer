@@ -170,6 +170,22 @@ class QRCodeViewerApp extends App.AppBase {
 
 	function handleSettings() {
 		System.println("Handle settings...");
+		Settings.load();
+		System.println(
+			"Settings = {"
+			+ "barcodeHeight: " + Settings.barcodeHeight
+			+ ", cacheEnabled: " + Settings.cacheEnabled
+			+ ", currentId: " + Settings.currentId
+			+ ", displayLabel: " + Settings.displayLabel
+			+ ", offsetY: " + Settings.offsetY
+			+ ", retainMenuIndex: " + Settings.retainMenuIndex
+			+ ", size: " + Settings.size
+			+ ", token: " + Settings.token 
+			+ ", customizeQRCodeGeneratingURL: " + Settings.customizeQRCodeGeneratingURL
+			+ ", codeGeneratingURL: " + Settings.codeGeneratingURL
+			+ "}"
+		);
+		
 		var app = App.getApp();
 		initQRCodes();
 		if(Settings.canUseExternalDataWithPosition()) {
@@ -200,7 +216,6 @@ class QRCodeViewerApp extends App.AppBase {
 	function initialize() {
 		System.println("App initialization...");
 		AppBase.initialize();
-		Settings.load();
 		handleSettings();
 		System.println("App initialized.");
 	}

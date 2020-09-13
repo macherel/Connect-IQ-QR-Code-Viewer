@@ -1,0 +1,57 @@
+<strings>
+	<string id="appName">QR Code Viewer</string>
+	
+	<string id="errorNoQRCode">ไม่พบ QR code</string>
+	<string id="selectQRCode">เลือก QR code</string>
+
+	<string id="mainMenuTitle">เลือก QR Code</string>
+
+	<string id="retainMenuIndex">แสดงโค้ดล่าสุด</string> 
+	<string id="CustomizeQRCodeGeneratingURL">ตั้งค่า URL ของ QR code</string> 
+	<string id="QRCodeGeneratingURLTitle">URL ของ QR code</string>
+	<string id="defaultQRCodeGeneratingURL">https://data-manager-api.qrcode.macherel.fr/codes/?size=${SIZE}&amp;text=${DATA}&amp;bcid=${TYPE}&amp;token=${TOKEN}</string> 
+	<string id="sizeTitle">ขนาด</string>
+	<string id="barcodeHeightTitle">ค่าสูงของ Barcode</string>
+	<string id="offsetY">เลื่อนภาพในแนวตั้ง</string>
+	<string id="offlineTitle">ใช้งานแบบออฟไลน์</string>
+	<string id="token">โทเคน</string>
+	<string id="externalDatasEnabled">เปิดใช้งานข้อมูลจากภายนอก</string>
+	<string id="usePosition">สร้างโค้ดจากเวปไซต์ภายนอก</string>
+	<string id="error">พบข้อผิดพลาด</string>
+	<string id="errorImage">โทเคน หรือ ประเภทของโค้ดไม่ถูกต้อง</string>
+
+	<string id="displayLabel">แสดงชื่อ</string> 
+	<string id="codeEnable1">เปิดใช้งาน</string>
+	<string id="codeLabel1">ชื่อ 1</string>
+	<string id="codeValue1">ค่า 1</string>
+	<string id="codeType1">ประเภท 1</string>
+	<string id="codeEnable2">เปิดใช้งาน</string>
+	<string id="codeLabel2">ชื่อ 2</string>
+	<string id="codeValue2">ค่า 2</string>
+	<string id="codeType2">ประเภท 2</string>
+	<string id="codeEnable3">เปิดใช้งาน</string>
+	<string id="codeLabel3">ชื่อ 3</string>
+	<string id="codeValue3">ค่า 3</string>
+	<string id="codeType3">ประเภท 3</string>
+	<string id="codeEnable4">เปิดใช้งาน</string>
+	<string id="codeLabel4">ชื่อ 4</string>
+	<string id="codeValue4">ค่า 4</string>
+	<string id="codeType4">ประเภท 4</string>
+	<string id="codeEnable5">เปิดใช้งาน</string>
+	<string id="codeLabel5">ชื่อ 5</string>
+	<string id="codeValue5">ค่า 5</string>
+	<string id="codeType5">ประเภท 5</string>
+	<string id="codeEnable6">เปิดใช้งาน</string>
+	<string id="codeLabel6">ชื่อ 6</string>
+	<string id="codeValue6">ค่า 6</string>
+	<string id="codeType6">ประเภท 6</string>
+	<string id="codeEnable7">เปิดใช้งาน</string>
+	<string id="codeLabel7">ชื่อ 7</string>
+	<string id="codeValue7">ค่า 7</string>
+	<string id="codeType7">ประเภท 7</string>
+	<string id="codeEnable8">เปิดใช้งาน</string>
+	<string id="codeLabel8">ชื่อ 8</string>
+	<string id="codeValue8">ค่า 8</string>
+	<string id="codeType8">ประเภท 8</string>
+
+</strings>
