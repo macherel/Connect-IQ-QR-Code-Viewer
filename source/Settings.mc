@@ -22,7 +22,6 @@ module Settings {
 			app.setProperty("liVersion", 0);
 			app.setProperty("cacheEnabled", true);
 		}
-		
 
 		barcodeHeight = app.getProperty("barcodeHeight");
 		cacheEnabled = app.getProperty("cacheEnabled");
