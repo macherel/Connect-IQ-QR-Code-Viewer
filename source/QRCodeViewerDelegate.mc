@@ -7,6 +7,34 @@ class QRCodeViewerDelegate extends Ui.BehaviorDelegate {
 		BehaviorDelegate.initialize();
 	}
 
+	function onNextPage() {
+		var app = App.getApp();
+		for(var i=0; i<app.enabledCodes.size(); i++) {
+			var code = app.enabledCodes[i];
+			if(code.id == Settings.currentId) {
+				var index = (i+1)%app.enabledCodes.size();
+				Settings.setCurrentId(app.enabledCodes[index].id);
+				Ui.switchToView(new QRCodeViewerView(), new QRCodeViewerDelegate(), Ui.SLIDE_UP);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	function onPreviousPage() {
+		var app = App.getApp();
+		for(var i=0; i<app.enabledCodes.size(); i++) {
+			var code = app.enabledCodes[i];
+			if(code.id == Settings.currentId) {
+				var index = (i-1+app.enabledCodes.size())%app.enabledCodes.size();
+				Settings.setCurrentId(app.enabledCodes[index].id);
+				Ui.switchToView(new QRCodeViewerView(), new QRCodeViewerDelegate(), Ui.SLIDE_DOWN);
+				return true;
+			}
+		}
+		return false;
+	}
+
 	function onSelect() {
 		var app = App.getApp();
 		
