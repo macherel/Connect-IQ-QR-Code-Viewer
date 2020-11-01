@@ -18,7 +18,7 @@
 	<string id="externalDatasEnabled">Activer les données externes</string>
 	<string id="usePosition">Trier par distance</string>
 	<string id="error">Erreur</string>
-	<string id="errorImage">type de code&#10;ou jeton invalide</string>
+	<string id="errorImage">Veuillez&#xA;contacter&#xA;le développeur</string>
 
 	<string id="displayLabel">Affiche les libellés</string>
 	<string id="codeEnable1">Actif</string>
