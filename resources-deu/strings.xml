@@ -1,0 +1,57 @@
+<strings>
+    <string id="appName">QR-Code Viewer</string>
+    
+    <string id="errorNoQRCode">Kein QR-code</string>
+   	<string id="selectQRCode">Wähle QR-Code</string>
+    
+    <string id="mainMenuTitle">Wähle QR-Code</string>
+
+	<string id="retainMenuIndex">Menüindex beibehalten</string> 
+	<string id="CustomizeQRCodeGeneratingURL">QR-Code URL anpassen</string> 
+	<string id="QRCodeGeneratingURLTitle">QR-Code URL</string>
+	<string id="defaultQRCodeGeneratingURL">https://data-manager-api.qrcode.macherel.fr/codes/?size=${SIZE}&amp;text=${DATA}&amp;bcid=${TYPE}&amp;token=${TOKEN}</string> 
+	<string id="sizeTitle">Grösse</string>
+	<string id="barcodeHeightTitle">Barcode-Höhe</string>
+	<string id="offsetY">Offset Y</string>
+	<string id="offlineTitle">Offline-Modus aktivieren</string>
+	<string id="token">Token</string>
+	<string id="externalDatasEnabled">Externe Daten aktivieren</string>
+	<string id="usePosition">Sortierung nach Distanz</string>
+	<string id="error">Fehler</string>
+	<string id="errorImage">Bitte&#xA;Entwickler&#xA;kontaktieren</string>
+
+	<string id="displayLabel">Displaybezeichnung</string> 
+    <string id="codeEnable1">Aktiv</string>
+    <string id="codeLabel1">Bezeichnung 1</string>
+    <string id="codeValue1">Wert 1</string>
+	<string id="codeType1">Typ 1</string>
+    <string id="codeEnable2">Aktiv</string>
+    <string id="codeLabel2">Bezeichnung 2</string>
+    <string id="codeValue2">Wert 2</string>
+	<string id="codeType2">Typ 2</string>
+    <string id="codeEnable3">Aktiv</string>
+    <string id="codeLabel3">Bezeichnung 3</string>
+    <string id="codeValue3">Wert 3</string>
+	<string id="codeType3">Typ 3</string>
+    <string id="codeEnable4">Aktiv</string>
+    <string id="codeLabel4">Bezeichnung 4</string>
+    <string id="codeValue4">Wert 4</string>
+	<string id="codeType4">Typ 4</string>
+    <string id="codeEnable5">Aktiv</string>
+    <string id="codeLabel5">Bezeichnung 5</string>
+    <string id="codeValue5">Wert 5</string>
+	<string id="codeType5">Typ 5</string>
+    <string id="codeEnable6">Aktiv</string>
+    <string id="codeLabel6">Bezeichnung 6</string>
+    <string id="codeValue6">Wert 6</string>
+	<string id="codeType6">Typ 6</string>
+    <string id="codeEnable7">Aktiv</string>
+    <string id="codeLabel7">Bezeichnung 7</string>
+    <string id="codeValue7">Wert 7</string>
+	<string id="codeType7">Typ 7</string>
+    <string id="codeEnable8">Aktiv</string>
+    <string id="codeLabel8">Bezeichnung 8</string>
+    <string id="codeValue8">Wert 8</string>
+	<string id="codeType8">Typ 8</string>
+
+</strings>
