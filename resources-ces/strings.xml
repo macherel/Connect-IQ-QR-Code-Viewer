@@ -1,0 +1,54 @@
+<strings>
+	<string id="appName">QR Code Viewer</string>
+
+	<string id="errorNoQRCode">Žádný QR kód</string>
+	<string id="selectQRCode">Vyberte QR kód</string>
+
+	<string id="mainMenuTitle">Vyberte QR kód</string>
+
+	<string id="retainMenuIndex">Ponechat index nabídky</string>
+	<string id="sizeTitle">Velikost</string>
+	<string id="barcodeHeightTitle">Výška èárového kódu</string>
+	<string id="offsetY">Ofset Y</string>
+	<string id="offlineTitle">Zapnout offline mód</string>
+	<string id="token">Token</string>
+	<string id="externalDatasEnabled">Povolit externí data</string>
+	<string id="usePosition">Seøadit kódy podle délky</string>
+	<string id="error">Chyba</string>
+	<string id="errorImage">Prosím&#xA;kontatujte&#xA;vývojáøe</string>
+
+	<string id="displayLabel">Zobrazit popis</string>
+	<string id="codeEnable1">Aktivovat</string>
+	<string id="codeLabel1">Popis 1</string>
+	<string id="codeValue1">Hodnota 1</string>
+	<string id="codeType1">Typ 1</string>
+	<string id="codeEnable2">Aktivovat</string>
+	<string id="codeLabel2">Popis 2</string>
+	<string id="codeValue2">Hodnota 2</string>
+	<string id="codeType2">Typ 2</string>
+	<string id="codeEnable3">Aktivovat</string>
+	<string id="codeLabel3">Popis 3</string>
+	<string id="codeValue3">Hodnota 3</string>
+	<string id="codeType3">Typ 3</string>
+	<string id="codeEnable4">Aktivovat</string>
+	<string id="codeLabel4">Popis 4</string>
+	<string id="codeValue4">Hodnota 4</string>
+	<string id="codeType4">Typ 4</string>
+	<string id="codeEnable5">Aktivovat</string>
+	<string id="codeLabel5">Popis 5</string>
+	<string id="codeValue5">Hodnota 5</string>
+	<string id="codeType5">Typ 5</string>
+	<string id="codeEnable6">Aktivovat</string>
+	<string id="codeLabel6">Popis 6</string>
+	<string id="codeValue6">Hodnota 6</string>
+	<string id="codeType6">Typ 6</string>
+	<string id="codeEnable7">Aktivovat</string>
+	<string id="codeLabel7">Popis 7</string>
+	<string id="codeValue7">Hodnota 7</string>
+	<string id="codeType7">Typ 7</string>
+	<string id="codeEnable8">Aktivovat</string>
+	<string id="codeLabel8">Popis 8</string>
+	<string id="codeValue8">Hodnota 8</string>
+	<string id="codeType8">Typ 8</string>
+
+</strings>
