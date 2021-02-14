@@ -111,19 +111,17 @@ class QRCodeViewerView extends Ui.View {
 			image = null;
 			message = app.getProperty("codeLabel" + id);
 			data = app.getProperty("codeValue" + id);
-			data = Communications.encodeURL(data);
-			var strUrl = Settings.codeGeneratingURL;
 			var sizeStr = size.format("%d");
 			var type = app.getProperty("codeType" + id);
 			if(type == null || type.length() == 0) {
 				type = "qrcode";
 			}
 			var token = app.getProperty("token");
-			strUrl = stringReplace(strUrl, "${DATA}", data);
-			strUrl = stringReplace(strUrl, "${SIZE}", sizeStr);
-			strUrl = stringReplace(strUrl, "${MARGIN}", 0);
-			strUrl = stringReplace(strUrl, "${TYPE}", type);
-			strUrl = stringReplace(strUrl, "${TOKEN}", token);
+			var strUrl = "https://data-manager-api.qrcode.macherel.fr/codes/";
+			strUrl += "?size=" + sizeStr;
+			strUrl += "&text=" + Communications.encodeURL(data);
+			strUrl += "&bcid=" + type;
+			strUrl += "&token=" + token;
 			requestCounter++;
 			System.println("Loading QR code from " + strUrl);
 			Comm.makeImageRequest(
@@ -163,7 +161,7 @@ class QRCodeViewerView extends Ui.View {
 			(dc.getHeight()) / 2,
 			Gfx.FONT_MEDIUM,
 			message,
-			Gfx.TEXT_JUSTIFY_CENTER
+			Gfx.TEXT_JUSTIFY_CENTER | Gfx.TEXT_JUSTIFY_VCENTER
 		);
 		if(id != null && (data != null || image != null)) {
 			System.println("Display QR code");

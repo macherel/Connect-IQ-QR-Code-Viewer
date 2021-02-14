@@ -35,8 +35,6 @@
 	<property id="codeValue8" type="string"></property>
 	<property id="codeType8" type="string">qrcode</property>
 	<property id="retainMenuIndex" type="boolean">false</property>
-	<property id="CustomizeQRCodeGeneratingURL" type="boolean">false</property>
-	<property id="QRCodeGeneratingURL" type="string"></property>
 	<property id="size" type="number">0</property>
 	<property id="barcodeHeight" type="number">0</property>
 	<property id="offsetY" type="number">0</property>

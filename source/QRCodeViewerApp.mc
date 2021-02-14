@@ -180,9 +180,7 @@ class QRCodeViewerApp extends App.AppBase {
 			+ ", offsetY: " + Settings.offsetY
 			+ ", retainMenuIndex: " + Settings.retainMenuIndex
 			+ ", size: " + Settings.size
-			+ ", token: " + Settings.token 
-			+ ", customizeQRCodeGeneratingURL: " + Settings.customizeQRCodeGeneratingURL
-			+ ", codeGeneratingURL: " + Settings.codeGeneratingURL
+			+ ", token: " + Settings.token
 			+ "}"
 		);
 		

@@ -6,10 +6,7 @@
 
 	<string id="mainMenuTitle">เลือก QR Code</string>
 
-	<string id="retainMenuIndex">แสดงโค้ดล่าสุด</string> 
-	<string id="CustomizeQRCodeGeneratingURL">ตั้งค่า URL ของ QR code</string> 
-	<string id="QRCodeGeneratingURLTitle">URL ของ QR code</string>
-	<string id="defaultQRCodeGeneratingURL">https://data-manager-api.qrcode.macherel.fr/codes/?size=${SIZE}&amp;text=${DATA}&amp;bcid=${TYPE}&amp;token=${TOKEN}</string> 
+	<string id="retainMenuIndex">แสดงโค้ดล่าสุด</string>
 	<string id="sizeTitle">ขนาด</string>
 	<string id="barcodeHeightTitle">ค่าสูงของ Barcode</string>
 	<string id="offsetY">เลื่อนภาพในแนวตั้ง</string>
@@ -20,7 +17,7 @@
 	<string id="error">พบข้อผิดพลาด</string>
 	<string id="errorImage">โทเคน หรือ ประเภทของโค้ดไม่ถูกต้อง</string>
 
-	<string id="displayLabel">แสดงชื่อ</string> 
+	<string id="displayLabel">แสดงชื่อ</string>
 	<string id="codeEnable1">เปิดใช้งาน</string>
 	<string id="codeLabel1">ชื่อ 1</string>
 	<string id="codeValue1">ค่า 1</string>
