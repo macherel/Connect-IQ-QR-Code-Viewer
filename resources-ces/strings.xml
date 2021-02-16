@@ -11,9 +11,6 @@
 	<string id="barcodeHeightTitle">Výška èárového kódu</string>
 	<string id="offsetY">Ofset Y</string>
 	<string id="offlineTitle">Zapnout offline mód</string>
-	<string id="token">Token</string>
-	<string id="externalDatasEnabled">Povolit externí data</string>
-	<string id="usePosition">Seøadit kódy podle délky</string>
 	<string id="error">Chyba</string>
 	<string id="errorImage">Prosím&#xA;kontatujte&#xA;vývojáøe</string>
 

@@ -11,9 +11,6 @@
 	<string id="barcodeHeightTitle">ค่าสูงของ Barcode</string>
 	<string id="offsetY">เลื่อนภาพในแนวตั้ง</string>
 	<string id="offlineTitle">ใช้งานแบบออฟไลน์</string>
-	<string id="token">โทเคน</string>
-	<string id="externalDatasEnabled">เปิดใช้งานข้อมูลจากภายนอก</string>
-	<string id="usePosition">สร้างโค้ดจากเวปไซต์ภายนอก</string>
 	<string id="error">พบข้อผิดพลาด</string>
 	<string id="errorImage">โทเคน หรือ ประเภทของโค้ดไม่ถูกต้อง</string>
 

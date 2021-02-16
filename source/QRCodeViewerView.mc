@@ -116,12 +116,10 @@ class QRCodeViewerView extends Ui.View {
 			if(type == null || type.length() == 0) {
 				type = "qrcode";
 			}
-			var token = app.getProperty("token");
 			var strUrl = "https://data-manager-api.qrcode.macherel.fr/codes/";
 			strUrl += "?size=" + sizeStr;
 			strUrl += "&text=" + Communications.encodeURL(data);
 			strUrl += "&bcid=" + type;
-			strUrl += "&token=" + token;
 			requestCounter++;
 			System.println("Loading QR code from " + strUrl);
 			Comm.makeImageRequest(
@@ -208,7 +206,6 @@ class QRCodeViewerView extends Ui.View {
 			switch(app.status) {
 				case :READY:
 					app.setStatus(:ERROR);
-				case :WAITING_POSITION:
 				case :WAITING_CODES:
 				case :ERROR:
 				case :UNKNOWN:
@@ -235,10 +232,6 @@ class QRCodeViewerView extends Ui.View {
 			case :READY:
 				System.println("status READY");
 				return false;
-			case :WAITING_POSITION:
-				System.println("status WAITING_POSITION");
-				color = Gfx.COLOR_DK_GREEN;
-				break;
 			case :WAITING_CODES:
 				System.println("status WAITING_CODES");
 				color = Gfx.COLOR_BLUE;

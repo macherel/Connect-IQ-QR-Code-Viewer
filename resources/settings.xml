@@ -1,11 +1,4 @@
 <settings>
-	<setting propertyKey="@Properties.token" title="@Strings.token"> 
-		<settingConfig type="alphaNumeric" />
-	</setting>
-	<setting propertyKey="@Properties.externalDatasEnabled" title="@Strings.externalDatasEnabled"> 
-		<settingConfig type="boolean" />
-	</setting>
-
 	<setting propertyKey="@Properties.displayLabel" title="@Strings.displayLabel">
 		<settingConfig type="boolean" />
 	</setting>
@@ -127,9 +120,6 @@
 		<settingConfig type="numeric" />
 	</setting>
 	<setting propertyKey="@Properties.cacheEnabled" title="@Strings.offlineTitle"> 
-		<settingConfig type="boolean" />
-	</setting>
-	<setting propertyKey="@Properties.usePosition" title="@Strings.usePosition"> 
 		<settingConfig type="boolean" />
 	</setting>
 

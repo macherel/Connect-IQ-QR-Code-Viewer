@@ -1,6 +1,6 @@
 <strings>
 	<string id="appName">QR Code Viewer</string>
-
+	
 	<string id="errorNoQRCode">No QR code</string>
 	<string id="selectQRCode">Select QR code</string>
 
@@ -11,9 +11,6 @@
 	<string id="barcodeHeightTitle">Barcode height</string>
 	<string id="offsetY">Offset Y</string>
 	<string id="offlineTitle">Enable offline mode</string>
-	<string id="token">Token</string>
-	<string id="externalDatasEnabled">Enable external data</string>
-	<string id="usePosition">Order codes by distance</string>
 	<string id="error">Error</string>
 	<string id="errorImage">Please&#xA;contact&#xA;developer</string>
 

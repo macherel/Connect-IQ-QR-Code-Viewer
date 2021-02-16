@@ -13,16 +13,6 @@ class QRCodeViewerApp extends App.AppBase {
 	// Callbacks
 	////////////////////////////////////////////////////////////////
 
-	function onPosition(info) {
-		System.println("Position received : " + info);
-		var myLocation = info.position.toDegrees();
-		latlng = {
-			:lat => myLocation[0],
-			:lng => myLocation[1]
-		};
-		loadQRCodes();
-	}
-
 	function onReceive(responseCode, data) {
 		System.println("Receiving data (" + responseCode + "): " + data);
 		var app = App.getApp();
@@ -32,34 +22,12 @@ class QRCodeViewerApp extends App.AppBase {
 			app.setProperty("cacheValue" + id, data["data"]);
 			app.setProperty("cacheData"  + id, data["response"]);
 			System.println("Cache data #" + id + " loaded");
-		} else if (responseCode == 401 && !isNullOrEmpty(data["id"])) {
-			var id = data["id"];
-			app.setProperty("cacheValue" + id, null);
-			app.setProperty("cacheData"  + id, null);
-			System.println("Invalid token while loading data #" + id);
 		} else {
-			System.println("Error while loading data");
+			System.println("Error while loading data : " + responseCode);
 			// nothing to do, data will be store next time
 		}
 		if(loadingCache==0) {
 			Ui.requestUpdate();
-		}
-	}
-	
-	function onReceiveQRCodes(responseCode, data) {
-		System.println("Receiving QR codes...");
-		var app = App.getApp();
-		if (responseCode == 200 && data != null) {
-			var qrCodes = data["qrcodes"];
-			for(var i=0; i<8 && i<qrCodes.size(); i++) {
-				var id = i+1;
-				Code.fromResponseData(id, qrCodes[i]).store();
-				System.println("QR code #" + id + " \"" + qrCodes[i]["name"] + "\" received.");
-			}
-			initQRCodes();
-		} else {
-			System.println("Error while loading QR codes (" + responseCode + ")");
-			// nothing to do, data will be loaded next time
 		}
 	}
 
@@ -80,14 +48,12 @@ class QRCodeViewerApp extends App.AppBase {
 		var id = code.id;
 		System.println("Initialize QR code #" + id);
 		var app = App.getApp();
-		var token = Settings.token;
-		if(Settings.cacheEnabled && (!isNullOrEmpty(token) || id==1)) {
+		if(Settings.cacheEnabled) {
 			loadingCache++;
 			var strUrl = "https://data-manager-api.qrcode.macherel.fr/codes/";
 			strUrl += "?id=" + Communications.encodeURL(id.format("%d"));
 			strUrl += "&text=" + Communications.encodeURL(code.value);
 			strUrl += "&bcid=" + Communications.encodeURL(code.type);
-			strUrl += "&token=" + Communications.encodeURL(token);
 			System.println("Loading cached data #" + id + " from " + strUrl);
 			Comm.makeWebRequest(
 				strUrl,
@@ -136,38 +102,6 @@ class QRCodeViewerApp extends App.AppBase {
 		}
 	}
 
-	/**
-	 * Load QR codes from webservice
-	 */
-	function loadQRCodes() {
-		if(!Settings.canUseExternalData()) {
-			return;
-		}
-
-		System.println("Loading QR codes...");
-		setStatus(:WAITING_CODES);
-		var app = App.getApp();
-		var strUrl = "https://data-manager-api.qrcode.macherel.fr/users/" + Settings.token;
-		if(latlng != null && Settings.canUseExternalDataWithPosition()) {
-			strUrl += "?lat=" + latlng[:lat];
-			strUrl += "&lng=" + latlng[:lng];
-		}
-		System.println("Loading QR codes from " + strUrl);
-		Comm.makeWebRequest(
-			strUrl,
-			null,
-			{
-				:methods => Comm.HTTP_REQUEST_METHOD_GET,
-				:headers => {
-					"Content-Type" => Comm.REQUEST_CONTENT_TYPE_JSON
-				},
-				:responseType => Comm.HTTP_RESPONSE_CONTENT_TYPE_JSON
-			},
-			method(:onReceiveQRCodes)
-		);
-		System.println("QR codes loaded.");
-	}
-
 	function handleSettings() {
 		System.println("Handle settings...");
 		Settings.load();
@@ -180,19 +114,11 @@ class QRCodeViewerApp extends App.AppBase {
 			+ ", offsetY: " + Settings.offsetY
 			+ ", retainMenuIndex: " + Settings.retainMenuIndex
 			+ ", size: " + Settings.size
-			+ ", token: " + Settings.token
 			+ "}"
 		);
 		
 		var app = App.getApp();
 		initQRCodes();
-		if(Settings.canUseExternalDataWithPosition()) {
-			System.println("Requesting position...");
-			setStatus(:WAITING_POSITION);
-			Position.enableLocationEvents(Position.LOCATION_ONE_SHOT, method(:onPosition));
-		} else if(Settings.canUseExternalData()) {
-			loadQRCodes();
-		}
 	}
 
 	function setStatus(newStatus) {

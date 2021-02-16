@@ -10,7 +10,6 @@ module Settings {
 	var offsetY;
 	var retainMenuIndex;
 	var size;
-	var token;
 
 	function load() {
 		var app = App.getApp();
@@ -28,26 +27,10 @@ module Settings {
 		offsetY = app.getProperty("offsetY");
 		retainMenuIndex = app.getProperty("retainMenuIndex");
 		size = app.getProperty("size");
-		token = app.getProperty("token");
 	}
 
 	function setCurrentId(id) {
 		currentId = id;
 		App.getApp().setProperty("currentId", currentId);
-	}
-
-	function hasToken() {
-		var app = App.getApp();
-		return !isNullOrEmpty(Settings.token);
-	}
-
-	function canUseExternalData() {
-		var app = App.getApp();
-		return app.getProperty("externalDatasEnabled") && Settings.hasToken();
-	}
-	function canUseExternalDataWithPosition() {
-		var app = App.getApp();
-		return app.getProperty("usePosition")
-			&& Settings.canUseExternalData();
 	}
 }

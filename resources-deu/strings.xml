@@ -11,9 +11,6 @@
 	<string id="barcodeHeightTitle">Barcode-Höhe</string>
 	<string id="offsetY">Offset Y</string>
 	<string id="offlineTitle">Offline-Modus aktivieren</string>
-	<string id="token">Token</string>
-	<string id="externalDatasEnabled">Externe Daten aktivieren</string>
-	<string id="usePosition">Sortierung nach Distanz</string>
 	<string id="error">Fehler</string>
 	<string id="errorImage">Bitte&#xA;Entwickler&#xA;kontaktieren</string>
 
