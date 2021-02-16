@@ -1,26 +1,20 @@
 <strings>
 	<string id="appName">QR Code Viewer</string>
-
+	
 	<string id="errorNoQRCode">No QR code</string>
 	<string id="selectQRCode">Select QR code</string>
 
 	<string id="mainMenuTitle">Select QR Code</string>
 
-	<string id="retainMenuIndex">Retain menu index</string> 
-	<string id="CustomizeQRCodeGeneratingURL">Customize QR Code URL</string> 
-	<string id="QRCodeGeneratingURLTitle">QR Code URL</string>
-	<string id="defaultQRCodeGeneratingURL">https://data-manager-api.qrcode.macherel.fr/codes/?size=${SIZE}&amp;text=${DATA}&amp;bcid=${TYPE}&amp;token=${TOKEN}</string> 
+	<string id="retainMenuIndex">Retain menu index</string>
 	<string id="sizeTitle">Size</string>
 	<string id="barcodeHeightTitle">Barcode height</string>
 	<string id="offsetY">Offset Y</string>
 	<string id="offlineTitle">Enable offline mode</string>
-	<string id="token">Token</string>
-	<string id="externalDatasEnabled">Enable external data</string>
-	<string id="usePosition">Order codes by distance</string>
 	<string id="error">Error</string>
 	<string id="errorImage">Please&#xA;contact&#xA;developer</string>
 
-	<string id="displayLabel">Display label</string> 
+	<string id="displayLabel">Display label</string>
 	<string id="codeEnable1">Enable</string>
 	<string id="codeLabel1">Label 1</string>
 	<string id="codeValue1">Value 1</string>

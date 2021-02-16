@@ -1,6 +1,4 @@
 <properties>
-	<property id="token" type="string"></property>
-	<property id="externalDatasEnabled" type="boolean">false</property>
 	<property id="displayLabel" type="boolean">false</property>
 	<property id="codeEnable1" type="boolean">false</property>
 	<property id="codeLabel1" type="string"></property>
@@ -35,11 +33,8 @@
 	<property id="codeValue8" type="string"></property>
 	<property id="codeType8" type="string">qrcode</property>
 	<property id="retainMenuIndex" type="boolean">false</property>
-	<property id="CustomizeQRCodeGeneratingURL" type="boolean">false</property>
-	<property id="QRCodeGeneratingURL" type="string"></property>
 	<property id="size" type="number">0</property>
 	<property id="barcodeHeight" type="number">0</property>
 	<property id="offsetY" type="number">0</property>
 	<property id="cacheEnabled" type="boolean">true</property>
-	<property id="usePosition" type="boolean">false</property>
 </properties>

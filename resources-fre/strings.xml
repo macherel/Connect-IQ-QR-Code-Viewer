@@ -6,17 +6,11 @@
 
 	<string id="mainMenuTitle">QR Code</string>
 
-	<string id="retainMenuIndex">Conserver l'index du menu</string> 
-	<string id="CustomizeQRCodeGeneratingURL">Personnaliser l'URL de génération</string> 
-	<string id="QRCodeGeneratingURLTitle">URL de génération du QR Code</string> 
-	<string id="defaultQRCodeGeneratingURL">https://data-manager-api.qrcode.macherel.fr/codes/?size=${SIZE}&amp;text=${DATA}&amp;bcid=${TYPE}&amp;token=${TOKEN}</string> 
+	<string id="retainMenuIndex">Conserver l'index du menu</string>
 	<string id="sizeTitle">Taille</string>
 	<string id="barcodeHeightTitle">Hauteur des codes-barres</string>
 	<string id="offsetY">Offset Y</string>
 	<string id="offlineTitle">Mode déconnecté</string>
-	<string id="token">Token</string>
-	<string id="externalDatasEnabled">Activer les données externes</string>
-	<string id="usePosition">Trier par distance</string>
 	<string id="error">Erreur</string>
 	<string id="errorImage">Veuillez&#xA;contacter&#xA;le développeur</string>
 
